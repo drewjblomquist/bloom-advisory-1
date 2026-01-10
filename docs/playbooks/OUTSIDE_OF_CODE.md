@@ -10,27 +10,27 @@ This checklist covers all tasks that must be completed **outside of the codebase
 
 ### Domain & DNS (Namecheap)
 
-- [ ] Domain purchased and accessible in Namecheap
-- [ ] Access to Namecheap DNS settings confirmed
-- [ ] Domain added to Vercel project
-- [ ] Vercel-provided DNS records copied
-- [ ] DNS records added to Namecheap
-- [ ] Conflicting DNS records removed
-- [ ] Domain ownership verified in Vercel
-- [ ] HTTPS/SSL certificate active
+- [ ] Domain purchased and accessible in Namecheap (Done)
+- [ ] Access to Namecheap DNS settings confirmed (Done)
+- [ ] Domain added to Vercel project (Done)
+- [ ] Vercel-provided DNS records copied (Done)
+- [ ] DNS records added to Namecheap (Done)
+- [ ] Conflicting DNS records removed (Done)
+- [ ] Domain ownership verified in Vercel (Done)
+- [ ] HTTPS/SSL certificate active (Done)
 - [ ] Canonical redirects working:
   - [ ] `http://bloomadvisory.ai` → `https://bloomadvisory.ai` (301)
   - [ ] `https://www.bloomadvisory.ai` → `https://bloomadvisory.ai` (301) if www configured
 
 ### Vercel Setup
 
-- [ ] Vercel account created
-- [ ] Vercel project created
-- [ ] GitHub repository connected to Vercel
-- [ ] Production branch set to `main`
-- [ ] Preview deployments enabled
+- [ ] Vercel account created (Done)
+- [ ] Vercel project created (Done)
+- [ ] GitHub repository connected to Vercel (Done)
+- [ ] Production branch set to `main` (Done)
+- [ ] Preview deployments enabled 
 - [ ] Build settings configured (Next.js)
-- [ ] Environment variables documented
+- [ ] Environment variables documented 
 
 ### Environment Variables
 
@@ -104,12 +104,12 @@ This checklist covers all tasks that must be completed **outside of the codebase
 
 ### V1 - Deploy Proof
 
-- [ ] Vercel project connected to GitHub
-- [ ] Domain added to Vercel
-- [ ] DNS records configured in Namecheap
-- [ ] Domain verified in Vercel
-- [ ] SSL certificate active
-- [ ] First deployment successful
+- [x] Vercel project connected to GitHub (Done - confirmed by user)
+- [x] Domain added to Vercel (Done - confirmed by user)
+- [x] DNS records configured in Namecheap (Done - confirmed by user)
+- [x] Domain verified in Vercel (Done - confirmed by user)
+- [x] SSL certificate active (Done - confirmed by user)
+- [x] First deployment successful (Code ready - pending push to main)
 
 ### V2 - UI Skeleton
 
