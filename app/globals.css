@@ -1,0 +1,44 @@
+/* Global Background System (V2)
+ * 
+ * Implementation Summary:
+ * - Single global gradient background covering entire page
+ * - 135-degree diagonal gradient as specified in DESIGN_CANON.md
+ * - Applied at root level (html/body) for full-page coverage
+ * - Ensures no white gaps at any scroll position or viewport size
+ * - Static only; no animations or parallax
+ */
+
+:root {
+  /* Background gradient colors (from DESIGN_CANON.md) */
+  --bg-gradient-start: hsla(233, 100%, 21%, 1);
+  --bg-gradient-mid: hsla(116, 100%, 21%, 1);
+  --bg-gradient-end: hsla(233, 100%, 21%, 1);
+}
+
+html {
+  /* Ensure full height coverage */
+  height: 100%;
+  /* Prevent white gaps during scroll on mobile Safari */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+body {
+  /* Apply global gradient background */
+  background: linear-gradient(
+    135deg,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-mid) 51%,
+    var(--bg-gradient-end) 100%
+  );
+  /* Ensure background covers full document height */
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* Prevent any white gaps */
+  margin: 0;
+  padding: 0;
+  /* Ensure background repeats to cover any overflow */
+  background-repeat: no-repeat;
+  /* Gradient naturally fills container; no need for background-size on gradient */
+}
