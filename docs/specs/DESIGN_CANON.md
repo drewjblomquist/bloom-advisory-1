@@ -24,10 +24,30 @@ Cursor must **implement**, not design. Any ambiguity must default to **simplicit
     - Admin page
 - The background **does not change per section**.
 - No section-level background colors unless explicitly defined later.
+- V2 baseline is a 135° diagonal gradient (see below).
 
-### Gradient Reference (Baseline)
+### V2 Baseline Gradient (Authoritative)
 
-This gradient defines the site's visual "vibe" and may be lightly refined, but **not replaced**.
+This diagonal gradient defines the V2 baseline and may be lightly refined for readability, but **not replaced**.
+
+```css
+linear-gradient(
+  135deg,
+  hsla(233, 100%, 21%, 1) 0%,
+  hsla(116, 100%, 21%, 1) 51%,
+  hsla(233, 100%, 21%, 1) 100%
+);
+```
+
+Rules:
+
+- 135° diagonal vibe must remain consistent
+- Minor color-stop tweaks are allowed for readability
+- No additional gradients may be introduced without PRD updates
+
+### Previous Baseline (Deprecated for V2)
+
+The following radial gradient is deprecated for V2 and should not be used unless explicitly re-approved.
 
 ```css
 radial-gradient(
@@ -37,17 +57,23 @@ radial-gradient(
 );
 ```
 
-Rules:
-
-- Direction and softness must remain consistent
-- Minor color-stop tweaks are allowed
-- No additional gradients may be introduced without PRD updates
-
 ### Texture
 
 - A **very subtle noise/grain texture** may be layered globally
 - Opacity must remain low (≈3–6%)
 - Texture is used to reduce flatness, not to be visually noticeable
+- Use only if implementation is simple and low-risk; otherwise defer
+
+### Background Constraints (V2)
+
+- Background never changes per section
+- No white gaps at bottom or during scroll
+- No banding or harsh edges introduced intentionally
+- Must work on mobile Safari without scroll artifacts
+- No heavy effects (WebGL, large shaders, multiple layered gradients)
+- No per-section overrides
+- No animated gradients or parallax
+- Keep performance stable; no large image assets for background
 
 ## Color & Contrast
 
@@ -72,7 +98,7 @@ Rules:
 - Large enough body text for easy reading
 - Typography must never feel playful or experimental
 
-(Font selection will be finalized before implementation.)
+(Font selection finalized for V2: Inter.)
 
 ## Glass / Translucency System ("Liquid Glass")
 
@@ -85,6 +111,11 @@ Used selectively to add depth and polish without harming readability.
 - Buttons
 - Modals
 - Word bubbles / message containers
+- Header surface (restrained liquid-glass treatment)
+- Header/nav glass pill for hover/focus/active (restrained, legible)
+- Service bubbles use the same liquid glass system as nav items
+- Footer icon buttons should remain restrained; avoid heavy glass
+- Footer social icons may use inline SVGs from official brand marks when `/design` assets are not present
 
 ### Explicitly Disallowed
 
@@ -98,6 +129,7 @@ Used selectively to add depth and polish without harming readability.
 - Uses translucency + blur (e.g. `backdrop-filter`)
 - Must degrade gracefully if unsupported
 - Must not reduce text legibility
+- No hard divider line at header bottom; use a soft fade if separation is needed
 
 Glass effects must feel **intentional and restrained**, not decorative.
 
@@ -110,7 +142,7 @@ Glass effects must feel **intentional and restrained**, not decorative.
 
 ### Scroll Behavior
 
-- Sections fade in on scroll
+- V2 default: no scroll-based animation unless explicitly approved per section spec
 - Animation style: **immediate and snappy**
 - No long easing or dramatic transitions
 
