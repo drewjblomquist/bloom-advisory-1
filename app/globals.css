@@ -13,6 +13,10 @@
   --bg-gradient-start: hsla(233, 100%, 21%, 1);
   --bg-gradient-mid: hsla(116, 100%, 21%, 1);
   --bg-gradient-end: hsla(233, 100%, 21%, 1);
+  
+  /* Glass effect tokens for header (semi-transparent gray tint) */
+  --glass-tint: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(8px);
 }
 
 html {

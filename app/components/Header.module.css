@@ -1,0 +1,99 @@
+/* Header Component Styles (V2)
+ * 
+ * Implements:
+ * - Sticky positioning (always visible)
+ * - Full-bleed glass background
+ * - Container pattern (max-w-7xl + responsive padding)
+ * - Left/right cluster layout
+ * - Bottom edge gradient fade
+ */
+
+.header {
+  /* Sticky positioning - always visible at top */
+  position: sticky;
+  top: 0;
+  z-index: 50; /* Above content, below modals (modals typically use z-50+ or higher) */
+  
+  /* Full-bleed width */
+  width: 100%;
+  
+  /* Glass effect: semi-transparent gray tint + subtle backdrop blur */
+  background-color: var(--glass-tint);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur); /* Safari support */
+  
+  /* Fallback: if backdrop-filter is unsupported, tint-only still provides separation */
+  
+  /* Medium, modern SaaS header height */
+  /* Using padding for height control - vertical padding from spacing scale */
+  padding-top: 1rem; /* py-4 equivalent */
+  padding-bottom: 1rem; /* py-4 equivalent */
+  
+  /* Prevent layout shift */
+  will-change: transform;
+}
+
+.container {
+  /* Container pattern: max-w-7xl + responsive horizontal padding */
+  max-width: 80rem; /* max-w-7xl = 80rem */
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Responsive horizontal padding */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  
+  /* Flex layout for left/right clusters */
+  display: flex;
+  align-items: center; /* Vertically center both clusters */
+  justify-content: space-between; /* Push left and right clusters to edges */
+}
+
+/* Responsive padding adjustments */
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem; /* lg:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+.leftCluster {
+  /* Logo slot pinned far left */
+  display: flex;
+  align-items: center;
+}
+
+.rightCluster {
+  /* Nav slot pinned far right */
+  display: flex;
+  align-items: center;
+}
+
+.bottomFade {
+  /* Bottom edge transition: short vertical gradient fade (~12-24px) */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5rem; /* ~24px - can be adjusted between 12-24px */
+  
+  /* Gradient fade from header tint to transparent */
+  background: linear-gradient(
+    to bottom,
+    var(--glass-tint) 0%,
+    transparent 100%
+  );
+  
+  /* Optional ultra-subtle shadow if needed (currently disabled) */
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); */
+  
+  /* Ensure fade doesn't block interactions */
+  pointer-events: none;
+}
