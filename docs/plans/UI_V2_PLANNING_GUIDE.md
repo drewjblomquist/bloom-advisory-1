@@ -63,14 +63,13 @@ Checklist for unknowns:
 
 1. Background
 2. Header
-3. Logo
-4. Nav items
-5. Hero Section
-6. About
-7. Services (bubbles)
-8. Questionnaire
-9. Contact us
-10. Footer (socials links)
+3. Nav items
+4. Hero Section
+5. About
+6. Services (bubbles)
+7. Questionnaire
+8. Contact us
+9. Footer (socials links)
 
 ### 4.2 Responsibilities (per section)
 
@@ -135,7 +134,6 @@ Verification expectations:
 Build order (one feature per commit):
 - Background
 - Header
-- Logo (pending spec)
 - Nav items
 - Hero Section
 - About (pending spec)

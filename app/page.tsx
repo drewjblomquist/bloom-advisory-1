@@ -1,5 +1,9 @@
+import NavItems from "./components/NavItems";
+
 export default function Home() {
   return (
-    <div></div>
-  )
+    <div>
+      <NavItems />
+    </div>
+  );
 }

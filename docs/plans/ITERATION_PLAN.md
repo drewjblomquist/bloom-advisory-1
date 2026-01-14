@@ -80,8 +80,6 @@ Create the **basic landing page structure** so we can wire real interactions nex
 ### Scope
 
 Public `/` includes placeholder sections (content can be rough):
-
-- Logo area (simple text placeholder acceptable)
 - Hero section (2 paragraphs)
 - Service offerings bubble list (static)
 - Questionnaire section **UI only** (fields render, no submit)

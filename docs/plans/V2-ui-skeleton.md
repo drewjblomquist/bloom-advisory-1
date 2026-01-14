@@ -25,7 +25,6 @@ Create the **basic landing page structure** so we can wire real interactions nex
 ## Acceptance Criteria
 
 - Public `/` includes:
-  - Logo area (text placeholder OK)
   - Hero section (2 paragraphs)
   - Service offerings bubble list (static)
   - Questionnaire section UI only (fields render, no submit)
