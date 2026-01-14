@@ -17,11 +17,10 @@
 }
 
 html {
-  /* Ensure full height coverage */
-  height: 100%;
-  /* Prevent white gaps during scroll on mobile Safari */
+  /* Ensure minimum viewport height coverage */
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  /* Allow html to grow with content beyond viewport */
 }
 
 body {
@@ -33,9 +32,9 @@ body {
     var(--bg-gradient-end) 100%
   );
   /* Ensure background covers full document height */
-  min-height: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  /* Allow body to grow with content, background will extend */
   /* Prevent any white gaps */
   margin: 0;
   padding: 0;
