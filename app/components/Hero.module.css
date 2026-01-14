@@ -14,7 +14,7 @@
 }
 
 .textBlock {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
@@ -27,6 +27,7 @@
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: #fff;
+  white-space: nowrap;
 }
 
 .subtitle {
@@ -41,5 +42,11 @@
 @media (min-width: 768px) {
   .section {
     padding: 128px 0 96px;
+  }
+}
+
+@media (max-width: 700px) {
+  .title {
+    white-space: normal;
   }
 }
