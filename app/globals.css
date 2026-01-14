@@ -42,4 +42,6 @@ body {
   /* Ensure background repeats to cover any overflow */
   background-repeat: no-repeat;
   /* Gradient naturally fills container; no need for background-size on gradient */
+  /* All text is white */
+  color: #fff;
 }
