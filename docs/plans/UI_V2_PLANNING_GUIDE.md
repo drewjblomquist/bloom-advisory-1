@@ -106,6 +106,51 @@ Use the following template for each section before any coding:
 - Do not change constraints:
 - Decision Needed (if any):
 
+### Section: About
+
+- Goal / intent:
+  - Introduce Bloom Advisory with a professional, concise overview below the Hero.
+- Layout contract:
+  - Containers:
+    - Full-width section wrapper.
+    - Inner container constrained to 1120px max width with 24px horizontal padding.
+    - Text block constrained to 720px max width, centered.
+  - Alignment rules:
+    - Centered text alignment at all breakpoints.
+  - Expected DOM structure (high level):
+    - section > div.container > div.textBlock > h2 + p
+- Typography hierarchy expectations:
+  - H2 with a moderate scale between hero title and subtitle.
+  - Body copy matches global font and color (white on gradient).
+- Spacing system expectations:
+  - Section vertical padding: 64px top and bottom on mobile, 96px+ on tablet/desktop.
+- Interaction / behavior:
+  - None.
+- Responsiveness rules (375 / 768 / 1024 / 1440):
+  - All breakpoints: centered single-column layout.
+  - Typography scales via clamp to avoid abrupt jumps.
+  - Text block remains within 720px max width.
+- Accessibility requirements:
+  - Section labeled via aria-labelledby on the H2.
+- Allowed files to touch (ownership + blast radius):
+  - app/components/About.tsx
+  - app/components/About.module.css
+  - app/page.tsx
+  - docs/plans/UI_V2_PLANNING_GUIDE.md
+- Acceptance criteria checklist:
+  - About section renders immediately below Hero.
+  - Typography and color match existing page text styling.
+  - Centered, single-column layout at all breakpoints.
+  - No overflow or clipping at 375 / 768 / 1024 / 1440 widths.
+- Test / verification steps:
+  - Visual check at 375 / 768 / 1024 / 1440 widths.
+  - Confirm heading is announced as section label via accessibility tree.
+- Do not change constraints:
+  - Do not alter global background or typography tokens.
+  - Do not introduce new font families.
+- Decision Needed (if any):
+  - None.
+
 ## 6) Implementation Protocol (Cursor/Codex)
 
 Workflow (must follow in order):
