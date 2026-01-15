@@ -41,8 +41,12 @@ const validateForm = (form: FormState): FormErrors => {
   return errors;
 };
 
-export default function Contact() {
-  const [isOpen, setIsOpen] = useState(false);
+type ContactProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export default function Contact({ isOpen, onClose }: ContactProps) {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
@@ -63,9 +67,9 @@ export default function Contact() {
   };
 
   const handleClose = () => {
-    setIsOpen(false);
     setSubmitAttempted(false);
     setTouched({});
+    onClose();
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -84,7 +88,7 @@ export default function Contact() {
     setForm(INITIAL_FORM);
     setSubmitAttempted(false);
     setTouched({});
-    setIsOpen(false);
+    onClose();
     setShowToast(true);
     toastTimer.current = setTimeout(() => {
       setShowToast(false);
@@ -98,9 +102,7 @@ export default function Contact() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsOpen(false);
-        setSubmitAttempted(false);
-        setTouched({});
+        handleClose();
       }
     };
 
@@ -111,17 +113,7 @@ export default function Contact() {
   }, [isOpen]);
 
   return (
-    <section id="contact" className={styles.section} aria-label="Contact Us">
-      <div className={styles.container}>
-        <button
-          type="button"
-          className={styles.ctaButton}
-          onClick={() => setIsOpen(true)}
-        >
-          Contact Us
-        </button>
-      </div>
-
+    <>
       {isOpen && (
         <div
           className={styles.backdrop}
@@ -260,6 +252,6 @@ export default function Contact() {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }

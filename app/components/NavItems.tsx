@@ -9,22 +9,39 @@ const NAV_ITEMS = [
 
 type NavItemsProps = {
   activeId?: string;
+  onContactClick?: () => void;
 };
 
-export default function NavItems({ activeId }: NavItemsProps) {
+export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
   return (
     <div className={styles.shell}>
       <nav className={styles.nav} aria-label="Primary">
         <ul className={styles.list}>
           {NAV_ITEMS.map((item) => {
             const isActive = activeId === item.id;
+            const className = `${styles.link} ${
+              isActive ? styles.active : ""
+            }`;
+
+            if (item.id === "contact" && onContactClick) {
+              return (
+                <li key={item.id} className={styles.item}>
+                  <button
+                    type="button"
+                    className={`${styles.button} ${
+                      isActive ? styles.active : ""
+                    }`}
+                    onClick={onContactClick}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            }
 
             return (
               <li key={item.id} className={styles.item}>
-                <a
-                  className={`${styles.link} ${isActive ? styles.active : ""}`}
-                  href={item.href}
-                >
+                <a className={className} href={item.href}>
                   {item.label}
                 </a>
               </li>
