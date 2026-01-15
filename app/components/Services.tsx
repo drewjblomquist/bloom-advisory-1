@@ -4,12 +4,12 @@ const SERVICES = [
   {
     id: "discovery",
     title: "Discovery",
-    description: "Find where time and money leak",
+    description: "Find how AI fits into your goals",
   },
   {
     id: "automation",
     title: "Automation",
-    description: "Eliminate manual, repetitive work",
+    description: "Let computers do the work you hate",
   },
   {
     id: "integration",
@@ -18,7 +18,7 @@ const SERVICES = [
   },
   {
     id: "visibility",
-    title: "Visibility",
+    title: "Analytics",
     description: "Track performance in real time",
   },
 ];

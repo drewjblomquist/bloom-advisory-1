@@ -7,14 +7,15 @@ export default function About() {
         <div className={styles.card}>
           <div className={styles.textBlock}>
             <h2 id="about-title" className={styles.title}>
-              About Us
+              Our Mission
             </h2>
             <p className={styles.body}>
-              Bloom Advisors helps small and mid-sized businesses simplify
-              complex operations and make smarter decisions with AI. We start by
-              identifying where time, money, and clarity break down, then design
-              practical automations built for day-to-day operations. The result
-              is clarity, efficiency, and systems that scale with your business.
+              Bloom Advisory is here to help small and mid-sized businesses simplify
+              day-to-day processes and scale thier abilities, using new systems. We are here to identify 
+              your biggest pain points, create a solution roadmap, and walk you all the way through implementation.
+              The result is more money in your pocket and more time to focus on what truly
+              delivers value to your customers. Our goal is to use this new wave of 
+              technology to empower teams to do the work that actually matters to them.
             </p>
           </div>
         </div>
