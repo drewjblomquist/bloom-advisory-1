@@ -9,7 +9,7 @@ This section defines the **exact build sequence** for BloomAdvisory.ai so we:
 - **avoid rework traps** (schema/auth/admin built in the right order),
 - **keep security aligned at every step** (not bolted on at the end).
 
-This plan is intentionally written like a senior engineer would structure a greenfield build: **infrastructure proof → UI skeleton → data plumbing → guardrails → admin + auth → versioning + polish**.
+This plan is intentionally written like a senior engineer would structure a greenfield build: **infrastructure proof → UI skeleton → data plumbing → guardrails → admin + auth → UI revamp → versioning + polish**.
 
 ## Global Rules (Apply to Every Iteration)
 
@@ -80,11 +80,11 @@ Create the **basic landing page structure** so we can wire real interactions nex
 ### Scope
 
 Public `/` includes placeholder sections (content can be rough):
-- Hero section (2 paragraphs)
+- Hero section (1 paragraph)
 - Service offerings bubble list (static)
-- Questionnaire section **UI only** (fields render, no submit)
-- Contact button opens modal **UI only**
-- Admin button links to `/admin` (page can be placeholder)
+- Questionnaire section **UI only** (fields render; local validation + toast allowed, no persistence)
+- Contact button opens modal **UI only** (local validation + toast allowed, no persistence)
+- Admin button links to `/admin/login` (page can be placeholder)
 - Footer socials icons (can be placeholder links)
 
 ### Non-goals
@@ -249,6 +249,33 @@ Make sure being logged in is **not enough** — you must also be an allowed admi
 ### Done means
 
 You now have **real authorization**, not just authentication.
+
+## V6.5 — UI Revamp & Design Alignment (Deferred Until After V6)
+
+### Goal
+
+Revisit and polish the public UI after core backend and auth are stable.
+
+### Scope
+
+- Align the landing page with the finalized design direction
+- Resolve any outstanding design canon mismatches
+- Confirm responsive behavior at 375 / 768 / 1024 / 1440
+
+### Non-goals
+
+- No new backend features
+- No schema changes
+- No admin feature expansion
+
+### Verification
+
+- Visual QA at all breakpoints
+- Accessibility spot-checks for nav and modal focus behavior
+
+### Done means
+
+The public UI is stable enough to support admin content editing in V8 without rework.
 
 ## V7 — Admin Can View Submissions (Read-Only)
 

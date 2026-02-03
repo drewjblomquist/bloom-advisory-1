@@ -7,13 +7,13 @@ This document is the single source of truth for planning and implementing the V2
 Scope:
 - Public landing page UI only
 - Section-by-section implementation
-- Tailwind + global CSS variables
+- CSS Modules + global CSS variables
 - No UI changes in this document; planning only
 
 ## 2) Non-Negotiable Constraints
 
 - This guide is authoritative; all V2 UI code must conform to it.
-- Styling approach: Tailwind + global CSS variables.
+- Styling approach: CSS Modules + global CSS variables.
 - Implementation discipline: only touch one component + its tests per step.
 - Quality bar: must look correct at 375 / 768 / 1024 / 1440 widths.
 - Build/refine one section at a time (no one-shot full page).
@@ -44,7 +44,7 @@ Checklist for unknowns:
 
 ### 3.3 Common Assumptions Agents Make (and How This Guide Prevents Them)
 
-1) "Use default Tailwind spacing" → forbidden unless spacing scale is defined.
+1) "Use default spacing scale" → forbidden unless spacing scale is defined.
 2) "Hero is a two-column layout" → only allowed if specified in section spec.
 3) "Header and logo live in the same component" → ownership must be explicit.
 4) "Mobile stacks in the usual order" → order must be stated in responsive rules.
@@ -216,12 +216,12 @@ How to document responsive intent:
 
 ## 8) Design System Policy (High-Level)
 
-Tailwind usage:
-- Use Tailwind utilities for layout and spacing.
-- Only use arbitrary values if defined in this guide.
-- Use Tailwind standard spacing scale; do not invent new spacing patterns.
-- Section vertical padding must use limited, intentional values (e.g. `py-16`, `py-24`).
-- Prefer `gap-*` for component internals instead of ad-hoc margins.
+CSS Modules usage:
+- Use CSS Modules for layout and spacing; avoid inline style overrides.
+- Only use values that are defined in this guide or explicitly documented per section.
+- Use a small, intentional spacing scale; do not invent new spacing patterns per component.
+- Section vertical padding must use limited, intentional values (documented in section specs).
+- Prefer `gap` for component internals instead of ad-hoc margins.
 
 Global CSS variables:
 - Define design tokens (colors, spacing, typography) as CSS variables.
@@ -239,17 +239,16 @@ Global vs component-local:
 
 Global container width & ownership:
 - Use a shared container pattern that owns:
-  - `max-w-7xl`
-  - horizontal padding (responsive `px-*`)
+  - `max-width: 1120px`
+  - horizontal padding (default 24px, responsive as needed)
 - Backgrounds may be full-bleed, but inner content must remain inside the container.
 - Sections own vertical spacing only.
-- No section may introduce its own `max-w-*` without an explicit update to this guide.
+- No section may introduce its own `max-width` without an explicit update to this guide.
 
 Typography token policy (role-based, non-visual):
 - Roles required: H1 (hero headline), H2 (section headers), Body, Small/Meta, Navigation.
 - Must follow modern SaaS readability norms.
-- Use Tailwind utility bundles documented by role, not raw values.
-- Avoid arbitrary font sizing.
+- Use documented role-based styles (no ad-hoc font sizes).
 - Font family selection is finalized for V2: Inter.
 
 Motion baseline rules (safety vault):
@@ -268,16 +267,15 @@ Decision Needed (must be kept up to date):
 - Any unresolved layout, spacing, or responsive rule.
 - Any component ownership or file boundary ambiguity.
 - Any missing design token beyond the global policies defined here.
-- Wire scroll-to-section after section IDs/anchors are finalized.
-- Wire header nav "Contact Us" to scroll to Contact section once anchors/IDs are finalized.
+- Wire scroll-to-section after section IDs/anchors are finalized (About, Services, Questionnaire only; no Contact section).
 
 Decisions Made:
 - Global CSS variables live under `:root` in `app/globals.css` only.
 - CSS variable naming: `--color-*`, `--space-*`, optional `--radius-*`.
-- Shared container pattern owns `max-w-7xl` + responsive horizontal padding.
+- Shared container pattern owns `max-width: 1120px` + responsive horizontal padding.
 - Sections own vertical spacing only; no section-level `max-w-*`.
 - Role-based typography tokens: H1, H2, Body, Small/Meta, Navigation.
-- Spacing scale uses Tailwind standard scale; constrained section vertical padding.
+- Spacing scale is intentionally limited and documented; constrained section vertical padding.
 - Mobile-first responsiveness framework and content-first ordering.
 - Motion baseline: minimal affordance-only motion with limited transitions.
 - File ownership map locked: one section component + its tests per step.
@@ -314,7 +312,7 @@ Decisions Made:
 - Input styling: off-white surface, very rounded corners, no glass inputs.
 - Validation: inline, neutral professional tone.
 - Success behavior: centered toast ~3s with exact text "Thank you for your response."
-- Contact is a page section and is reachable via header nav (scroll target later).
+- Contact: opened only via "Contact Us" button in nav (NavItems); no dedicated Contact section on page (decision made when closing V2).
 - Contact modal close methods: X, backdrop click, Escape.
 - Contact inputs match questionnaire; modal container uses glass.
 - Contact requiredness: email + message required; phone optional.
@@ -327,6 +325,8 @@ Decisions Made:
 - Footer external link behavior: new tab + safe rel attributes.
 - Footer color/contrast: muted default -> high-contrast on hover/focus.
 - Footer icons: inline SVGs from official brand marks (no `/design` assets required for V2).
+- Questionnaire title/note: "Assessment of Current Processes" and "This short quiz helps us understand where we can help give you back time, money, and clarity in your business." (Updated to match implementation when closing V2.)
+- Footer socials: Instagram, X, and Substack included (Substack added by decision when closing V2).
 
 Rule: If ambiguity is found during implementation, update this register before coding.
 
@@ -605,8 +605,9 @@ Rule: If ambiguity is found during implementation, update this register before c
   - Collect operational clarity inputs in a single, continuous form.
 - Layout contract:
   - Inline section on the landing page (scroll-to anchor).
-  - Section title: "Bloom Advisors — Operational Clarity Assessment".
-  - Positioning note above the first question: "This short assessment helps us understand where time, money, and clarity are being lost in your operations."
+  - Section title: "Assessment of Current Processes".
+  - Positioning note above the first question: "This short quiz helps us understand where we can help give you back time, money, and clarity in your business."
+  - _(Updated to match implementation when closing V2.)_
   - Form content is centered inside the global container with a sensible max width to avoid overly wide fields.
   - Inputs use an off-white surface with very rounded corners; no glass styling.
   - Questions (locked, in order):
@@ -730,11 +731,10 @@ Rule: If ambiguity is found during implementation, update this register before c
 - Goal / intent:
   - Provide a lightweight contact capture path with a single modal form.
 - Layout contract:
-  - Contact is a dedicated page section (scroll target).
-  - Section contains a single "Contact Us" button that opens a modal.
+  - Contact is opened **only via the "Contact Us" button in the nav (NavItems)**. There is no dedicated Contact section on the page body (decision made for V2).
   - Modal container uses restrained liquid-glass surface (rectangular card).
   - Inputs match Questionnaire styling: off-white surface, very rounded corners, no glass.
-  - Expected DOM structure (high level): section wrapper -> container -> button -> modal (glass card) -> form fields.
+  - Expected DOM structure (high level): nav button (in ContactController/NavItems) -> modal (glass card) -> form fields.
 - Typography hierarchy expectations:
   - Font: Inter.
   - Clear labels and helper/error text using role-based tokens.
@@ -766,7 +766,7 @@ Rule: If ambiguity is found during implementation, update this register before c
   - `app/page.tsx` for composition only (no layout logic).
   - Shared modal/toast component only if it already exists and is the single owner.
 - Acceptance criteria checklist:
-  - Contact section exists with a single "Contact Us" button.
+  - "Contact Us" in the nav opens the modal (no dedicated Contact section on page).
   - Modal opens/closes via X, backdrop, and Escape.
   - Modal uses glass container; inputs match Questionnaire (off-white, very rounded).
   - Required fields: email + message; phone optional.
@@ -797,10 +797,11 @@ Rule: If ambiguity is found during implementation, update this register before c
 - Goal / intent:
   - Provide clean, restrained outbound links to Bloom Advisory social profiles.
 - Layout contract:
-  - Footer contains only two icons: Instagram and X.
+  - Footer contains three icons: Instagram, X, and Substack (Substack added by decision when closing V2).
   - Links (exact):
     - X: https://x.com/bloomadvisoryai?s=21
     - Instagram: https://www.instagram.com/bloomadvisory.ai/
+    - Substack: https://substack.com/@drewblomquist?utm_campaign=profile&utm_medium=profile-page
   - Icons are centered horizontally in a single row.
   - Even spacing between icons; aligned and visually balanced.
   - Each icon sits inside a subtle circular button (no heavy decoration).
@@ -829,7 +830,7 @@ Rule: If ambiguity is found during implementation, update this register before c
   - Single footer component file + its test/verification artifact only.
   - `app/page.tsx` for composition only (no layout logic).
 - Acceptance criteria checklist:
-  - Only Instagram + X icons rendered.
+  - Instagram, X, and Substack icons rendered.
   - Links point to exact destinations.
   - Icons centered and evenly spaced in a single row.
   - Subtle circular button styling; no heavy glass effects.
@@ -842,7 +843,7 @@ Rule: If ambiguity is found during implementation, update this register before c
   - Mobile tap target check at 375.
   - Verify external link behavior and rel attributes.
 - Do not change constraints:
-  - Do not add other social platforms.
+  - Do not add social platforms beyond Instagram, X, and Substack without updating this guide.
   - Do not use heavy glass effects.
   - Do not hide icons behind hover-only visibility.
   - Do not use low-contrast muted icons that are hard to see.

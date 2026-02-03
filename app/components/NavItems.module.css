@@ -2,15 +2,30 @@
   width: 100%;
   padding: 16px 24px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
   box-sizing: border-box;
 }
 
 .nav {
-  width: 100%;
+  flex: 1;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .list {

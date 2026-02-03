@@ -113,9 +113,9 @@ This checklist covers all tasks that must be completed **outside of the codebase
 
 ### V2 - UI Skeleton
 
-- [ ] Design asset rule acknowledged:
-  - [ ] No invented visuals
-  - [ ] If no approved background or favicon exists, use gradient-only background and no custom favicon
+- [x] Design asset rule acknowledged (V2 closed):
+  - [x] No invented visuals
+  - [x] If no approved background or favicon exists, use gradient-only background and no custom favicon
 
 ### V3 - Database Setup
 
@@ -147,6 +147,12 @@ This checklist covers all tasks that must be completed **outside of the codebase
 - [ ] Initial admin user added to table
 - [ ] Authorization logic tested
 - [ ] Unauthorized access blocked
+
+### V6.5 - UI Revamp & Design Alignment
+
+- [ ] UI goals finalized and documented
+- [ ] Design canon conflicts reviewed (resolve or explicitly defer)
+- [ ] Approved assets present if required (backgrounds/favicon)
 
 ### V8 - Admin Edit Content
 

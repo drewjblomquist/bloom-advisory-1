@@ -4,12 +4,12 @@ const SERVICES = [
   {
     id: "discovery",
     title: "Discovery",
-    description: "Find how AI fits into your goals",
+    description: "Find new software to match your goals",
   },
   {
     id: "automation",
     title: "Automation",
-    description: "Let computers do the work you hate",
+    description: "Let systems do monotonous work",
   },
   {
     id: "integration",

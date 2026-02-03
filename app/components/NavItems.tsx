@@ -5,6 +5,7 @@ const NAV_ITEMS = [
   { id: "services", label: "Services", href: "#services" },
   { id: "questionnaire", label: "Questionnaire", href: "#questionnaire" },
   { id: "contact", label: "Contact Us", href: "#contact" },
+  { id: "admin", label: "Admin", href: "/admin/login" },
 ];
 
 type NavItemsProps = {
@@ -15,6 +16,13 @@ type NavItemsProps = {
 export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
   return (
     <div className={styles.shell}>
+      <a className={styles.logoLink} href="/" aria-label="Bloom Advisory home">
+        <img
+          className={styles.logo}
+          src="/images/brand/Bloom%20Advisory.svg"
+          alt="Bloom Advisory"
+        />
+      </a>
       <nav className={styles.nav} aria-label="Primary">
         <ul className={styles.list}>
           {NAV_ITEMS.map((item) => {

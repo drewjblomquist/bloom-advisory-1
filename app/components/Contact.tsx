@@ -52,6 +52,8 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   const errors = useMemo(() => validateForm(form), [form]);
 
@@ -100,15 +102,49 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
       return;
     }
 
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         handleClose();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])',
+      );
+
+      if (!focusable || focusable.length === 0) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
+
+    const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+      'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])',
+    );
+    if (focusable && focusable.length > 0) {
+      focusable[0].focus();
+    }
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused.current?.focus();
     };
   }, [isOpen]);
 
@@ -129,6 +165,7 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
+            ref={modalRef}
           >
             <header className={styles.header}>
               <div className={styles.headerText}>

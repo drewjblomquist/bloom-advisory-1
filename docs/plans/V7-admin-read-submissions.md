@@ -11,6 +11,7 @@
 
 - V6 complete
 - Admin authorization verified
+- V6.5 UI revamp complete
 - Hard stop if any gate item is incomplete
 
 ## Goal

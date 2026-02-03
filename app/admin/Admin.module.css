@@ -1,0 +1,35 @@
+.section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 96px 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.inner {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.title {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-align: center;
+}

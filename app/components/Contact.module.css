@@ -1,3 +1,56 @@
+.section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 96px 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.ctaButton {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.ctaButton:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+@supports (
+  (-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))
+) {
+  .ctaButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
 .backdrop {
   position: fixed;
   inset: 0;
@@ -212,6 +265,10 @@
 }
 
 @media (max-width: 640px) {
+  .section {
+    padding: 80px 0;
+  }
+
   .backdrop {
     align-items: flex-start;
     padding: 16px;
@@ -224,3 +281,9 @@
     overflow-y: auto;
   }
 }
+@media (min-width: 768px) {
+  .section {
+    padding: 112px 0;
+  }
+}
+

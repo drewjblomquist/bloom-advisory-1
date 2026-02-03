@@ -12,6 +12,7 @@
 - Outside-of-code checklist: V8 - Admin Edit Content
 - `site_content` table created with RLS enabled
 - Admin authorization verified
+- V6.5 UI revamp complete
 - Hard stop if any gate item is incomplete
 
 ## Goal

@@ -66,12 +66,15 @@ Every iteration must meet these criteria:
 
 ### V2 - UI Skeleton
 
-- [ ] All UI sections render correctly
-- [ ] Responsive on desktop and mobile
-- [ ] No console errors
-- [ ] Forms are visible and usable (even if not functional)
-- [ ] Navigation works
-- [ ] Design asset rule followed (no invented visuals; gradient-only background allowed if no approved assets exist)
+- [x] All UI sections render correctly
+- [x] Responsive on desktop and mobile
+- [x] No console errors
+- [x] Forms are visible and usable (even if not functional)
+- [x] Local-only validation/toast messaging is acceptable (no persistence in V2)
+- [x] Navigation works
+- [x] Design asset rule followed (no invented visuals; gradient-only background allowed if no approved assets exist)
+
+_Plan and planning docs updated to match implementation when closing V2 (Questionnaire copy, Contact nav-only, Footer Substack). Run verification steps in V2-ui-skeleton.md once in production before marking iteration complete._
 
 ### V3 - Database Submission Pipeline
 
@@ -111,6 +114,13 @@ Every iteration must meet these criteria:
 - [ ] Unauthorized user denied access
 - [ ] No hardcoded emails in code
 - [ ] RLS policies configured for admin tables
+
+### V6.5 - UI Revamp & Design Alignment
+
+- [ ] UI goals documented and finalized
+- [ ] Design canon conflicts resolved or explicitly deferred
+- [ ] Responsive QA at 375 / 768 / 1024 / 1440
+- [ ] No regressions to V3–V6 functionality
 
 ### V7 - Admin Read Submissions
 

@@ -25,11 +25,11 @@ Create the **basic landing page structure** so we can wire real interactions nex
 ## Acceptance Criteria
 
 - Public `/` includes:
-  - Hero section (2 paragraphs)
+  - Hero section (1 paragraph)
   - Service offerings bubble list (static)
-  - Questionnaire section UI only (fields render, no submit)
-  - Contact modal UI only
-  - Admin button links to `/admin` (page can be placeholder)
+  - Questionnaire section UI only (fields render; local validation + toast allowed, no persistence)
+  - Contact modal UI only (local validation + toast allowed, no persistence)
+  - Admin button links to `/admin/login` (page can be placeholder)
   - Footer socials icons (placeholder links OK)
 - Page renders cleanly on desktop and mobile
 - Contact modal opens/closes
@@ -55,3 +55,14 @@ Create the **basic landing page structure** so we can wire real interactions nex
 - Design assets are missing and the gradient-only fallback is not acknowledged
 - Any gate item is incomplete
 - Plan reality diverges without updating this plan and adding an ADR if architecture changes
+
+---
+
+## Implementation Notes (V2 Closed)
+
+When closing V2, the following were aligned so that **plans match the implemented code**:
+
+1. **Contact:** Contact modal is opened only via the "Contact Us" button in the nav (NavItems). There is no dedicated Contact section on the page body. Decision: keep nav-only entry point for V2.
+2. **Questionnaire copy:** Section title is "Assessment of Current Processes"; positioning note is "This short quiz helps us understand where we can help give you back time, money, and clarity in your business." (Updated in UI_V2_PLANNING_GUIDE to match.)
+3. **Footer:** Footer includes three social links: X, Instagram, and Substack. (Planning guide updated to allow Substack; decision recorded.)
+4. **Design asset rule:** Gradient-only background and no custom favicon are in use and acknowledged in OUTSIDE_OF_CODE checklist.

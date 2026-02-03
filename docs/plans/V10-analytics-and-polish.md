@@ -1,4 +1,4 @@
-# V10 — Analytics Integration + Polished Visual System
+# V10 — Analytics Integration + Final QA
 
 ## Doc Routing Header
 
@@ -15,12 +15,13 @@
 
 ## Goal
 
-Add GA4/GTM and finalize the visual canon implementation once core functionality is stable.
+Add GA4/GTM and perform final QA once core functionality and the V6.5 UI revamp are complete.
 
 ## Non-goals
 
 - No additional analytics providers
 - No new visual experiments beyond the design canon
+- No major UI revamp (handled in V6.5)
 
 ## Acceptance Criteria
 
@@ -33,7 +34,7 @@ Add GA4/GTM and finalize the visual canon implementation once core functionality
   - `admin_login_success`
 - Events appear in GA4 DebugView
 - No duplicate page views
-- Design canon applied:
+- Design canon verified (no regressions):
   - Global gradient applied
   - Typography matches spec
   - Glass effects used only where allowed
