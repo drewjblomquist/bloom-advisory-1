@@ -1,5 +1,9 @@
 # UI V2 Planning Guide (Source of Truth)
 
+Historical V2 visual specifications are superseded for the user-requested
+2026-09-05 refresh by `design/DESIGN-NOTES.md`. Questionnaire fields, options,
+requiredness, and submission semantics remain authoritative here.
+
 ## 1) Purpose + Scope
 
 This document is the single source of truth for planning and implementing the V2 landing page UI. It defines how UI decisions are specified, how agents must interpret them, and how we avoid layout drift. It does not include visual specifics yet.

@@ -1,71 +1,46 @@
 .section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 64px 0;
-  box-sizing: border-box;
+  padding: 100px 48px 70px;
+  max-width: 1280px;
+  margin: auto;
 }
-
-.container {
-  width: 100%;
-  max-width: 1120px;
-  padding: 0 24px;
-  box-sizing: border-box;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
 }
-
-.textBlock {
-  max-width: 720px;
-  text-align: center;
-}
-
-.card {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px 24px 32px 24px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background-color: rgba(255, 255, 255, 0.1);
-  box-sizing: border-box;
-}
-
-.card .textBlock {
-  margin: 0 auto;
-}
-
 .title {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  font-size: clamp(2rem, 3.5vw, 3.1rem);
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: #fff;
+  letter-spacing: -0.045em;
+  line-height: 1.16;
 }
-
-.body {
-  margin: 20px 0 0;
-  font-family: "Inter", sans-serif;
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  font-weight: 400;
-  line-height: 1.6;
-  color: #fff;
+.copy p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.85;
 }
-
-@media (min-width: 768px) {
+.copy p:first-child {
+  color: var(--text);
+  font-size: 1.12rem;
+}
+.copy a {
+  display: inline-block;
+  padding: 12px 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+.copy a span {
+  margin-left: 20px;
+}
+@media (max-width: 767px) {
   .section {
-    padding: 96px 0;
+    padding: 70px 24px 30px;
   }
-
-  .card {
-    padding: 24px 40px 40px 40px;
-  }
-}
-
-@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
-  .card {
-    background-color: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
   }
 }

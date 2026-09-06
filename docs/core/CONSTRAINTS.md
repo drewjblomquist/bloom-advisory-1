@@ -8,6 +8,14 @@ If a chat instruction conflicts with this document, **pause and request an expli
 
 ## Priority Order (Highest → Lowest)
 
+### Approved public UI refresh — 2026-09-05
+
+Drew explicitly requested a modern visual redesign after V3 shipped. For this
+slice, the design direction in `design/DESIGN-NOTES.md` supersedes the older
+V2 layout, exact gradient, copy, and no-design-invention restrictions below.
+Implement the public UI refresh now, ahead of V4; retain all architecture,
+privacy, API, and form requiredness constraints.
+
 1. This document (`docs/core/CONSTRAINTS.md`)
 2. Accepted ADRs in `docs/decisions/`
 3. Active iteration plan in `docs/plans/`

@@ -1,5 +1,4 @@
 import styles from "./About.module.css";
-
 export default function About() {
   return (
     <section
@@ -7,21 +6,26 @@ export default function About() {
       className={styles.section}
       aria-labelledby="about-title"
     >
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <div className={styles.textBlock}>
-            <h2 id="about-title" className={styles.title}>
-              Our Mission
-            </h2>
-            <p className={styles.body}>
-              Bloom Advisory is here to help small and mid-sized businesses simplify
-              day-to-day processes and scale their abilities, using new systems. We are here to identify 
-              your biggest pain points, create a solution roadmap, and walk you all the way through implementation.
-              The result is more money in your pocket and more time to focus on what truly
-              delivers value to your customers. Our goal is to use this new wave of 
-              technology to empower teams to do the work that actually matters to them.
-            </p>
-          </div>
+      <p className="eyebrow">01 / A little clarity goes a long way</p>
+      <div className={styles.grid}>
+        <h2 id="about-title" className={styles.title}>
+          Technology should
+          <br />
+          give you time back.
+        </h2>
+        <div className={styles.copy}>
+          <p>
+            More software isn’t always the answer. Better-connected tools,
+            simpler processes, and a clear plan can make all the difference.
+          </p>
+          <p>
+            Bloom Advisory helps small and mid-sized businesses untangle the
+            work behind the work. We identify your biggest pain points, build a
+            practical roadmap, and stay with you through implementation.
+          </p>
+          <a href="#questionnaire">
+            Let’s start with your business <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </section>

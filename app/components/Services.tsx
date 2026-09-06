@@ -1,40 +1,58 @@
 import styles from "./Services.module.css";
-
 const SERVICES = [
   {
-    id: "discovery",
     title: "Discovery",
-    description: "Find new software to match your goals",
+    description:
+      "Cut through the options. Find the software and opportunities that actually fit your goals.",
+    detail: "A clearer starting point",
   },
   {
-    id: "automation",
     title: "Automation",
-    description: "Let systems do monotonous work",
+    description:
+      "Give repetitive tasks a better home, so your team can focus on the work that needs them.",
+    detail: "Less manual work",
   },
   {
-    id: "integration",
     title: "Integration",
-    description: "Connect systems that don't talk",
+    description:
+      "Connect the systems you already use. Keep information moving without the copy and paste.",
+    detail: "Tools that work together",
   },
   {
-    id: "visibility",
     title: "Analytics",
-    description: "Track performance in real time",
+    description:
+      "Turn scattered data into a clearer picture of your business and the decisions ahead.",
+    detail: "More useful visibility",
   },
 ];
-
 export default function Services() {
   return (
-    <section id="services" className={styles.section}>
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          {SERVICES.map((service) => (
-            <div key={service.id} className={styles.bubble}>
-              <h3 className={styles.title}>{service.title}</h3>
-              <p className={styles.description}>{service.description}</p>
-            </div>
-          ))}
-        </div>
+    <section
+      id="services"
+      className={styles.section}
+      aria-labelledby="services-title"
+    >
+      <p className="eyebrow">02 / Where we can help</p>
+      <div className={styles.header}>
+        <h2 id="services-title">
+          Better systems.
+          <br />A better day at work.
+        </h2>
+        <p>
+          Focused improvements.
+          <br />
+          Built around the way you work.
+        </p>
+      </div>
+      <div className={styles.grid}>
+        {SERVICES.map((service, index) => (
+          <article key={service.title} className={styles.service}>
+            <span className={styles.number}>0{index + 1}</span>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <span className={styles.detail}>{service.detail}</span>
+          </article>
+        ))}
       </div>
     </section>
   );

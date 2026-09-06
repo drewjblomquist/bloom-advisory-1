@@ -280,6 +280,7 @@ export default function Questionnaire() {
       <div className={styles.container}>
         <div className={styles.inner}>
           <header className={styles.header}>
+            <p className="eyebrow">03 / Your next chapter starts here</p>
             <h2 id="questionnaire-title" className={styles.title}>
               Assessment of Current Processes
             </h2>
@@ -289,6 +290,7 @@ export default function Questionnaire() {
           </header>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            <h3 className={styles.sectionHeading}>01 — Your business</h3>
             <div className={styles.field}>
               <label className={styles.label} htmlFor="businessName">
                 Business name
@@ -401,6 +403,7 @@ export default function Questionnaire() {
               </span>
             </div>
 
+            <h3 className={styles.sectionHeading}>02 — The way you work</h3>
             <div
               className={styles.fieldset}
               role="group"
@@ -566,6 +569,7 @@ export default function Questionnaire() {
               </span>
             </div>
 
+            <h3 className={styles.sectionHeading}>03 — What comes next</h3>
             <div
               className={styles.fieldset}
               role="group"
@@ -695,7 +699,7 @@ export default function Questionnaire() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="phone">
-                Phone number
+                Phone number (optional)
               </label>
               <input
                 id="phone"

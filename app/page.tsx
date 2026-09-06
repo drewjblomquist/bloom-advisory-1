@@ -8,11 +8,16 @@ import ContactController from "./components/ContactController";
 export default function Home() {
   return (
     <div>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <ContactController />
-      <Hero />
-      <About />
-      <Services />
-      <Questionnaire />
+      <main id="main">
+        <Hero />
+        <About />
+        <Services />
+        <Questionnaire />
+      </main>
       <Footer />
     </div>
   );

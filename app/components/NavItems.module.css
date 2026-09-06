@@ -1,108 +1,83 @@
 .shell {
+  max-width: 1280px;
   width: 100%;
-  padding: 16px 24px;
+  padding: 28px 48px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  box-sizing: border-box;
+  gap: 24px;
 }
-
-.nav {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  box-sizing: border-box;
-}
-
 .logoLink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  text-decoration: none;
+  flex-shrink: 0;
 }
-
 .logo {
-  height: 32px;
-  width: auto;
   display: block;
+  width: 190px;
+  height: auto;
 }
-
+.nav {
+  display: flex;
+}
 .list {
   list-style: none;
   display: flex;
-  gap: 8px;
-  margin: 0;
+  gap: 22px;
+  align-items: center;
   padding: 0;
-  white-space: nowrap;
+  margin: 0;
 }
-
 .item {
   display: flex;
 }
-
-.link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  color: #fff;
-  text-decoration: none;
-  font-family: "Inter", sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  transition: background-color 180ms ease-out, opacity 180ms ease-out,
-    border-color 180ms ease-out;
-}
-
+.link,
 .button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #fff;
-  font-family: "Inter", sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: background-color 180ms ease-out, opacity 180ms ease-out,
-    border-color 180ms ease-out;
+  min-height: 44px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: var(--muted);
 }
-
 .link:hover,
-.link:focus-visible,
-.button:hover,
-.button:focus-visible,
 .active {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--accent);
 }
-
-.link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.55);
-  outline-offset: 2px;
+.button {
+  padding: 0 20px;
+  border: 1px solid #60715f;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text);
+  transition: background 150ms;
 }
-
-.button:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.55);
-  outline-offset: 2px;
+.button:hover {
+  background: var(--surface);
 }
-
-@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
-  .link:hover,
-  .link:focus-visible,
-  .button:hover,
-  .button:focus-visible,
-  .active {
-    background-color: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+@media (max-width: 767px) {
+  .shell {
+    padding: 24px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .logo {
+    width: 168px;
+  }
+  .nav {
+    width: 100%;
+  }
+  .list {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .link,
+  .button {
+    font-size: 0.7rem;
+  }
+  .button {
+    padding: 0 13px;
   }
 }

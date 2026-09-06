@@ -61,6 +61,14 @@ export default function Footer() {
   return (
     <footer className={styles.footer} aria-label="Social media">
       <div className={styles.container}>
+        <div>
+          <a href="/" className={styles.brand}>
+            Bloom Advisory
+          </a>
+          <p className={styles.tagline}>
+            A little clarity. A lot more possibility.
+          </p>
+        </div>
         <div className={styles.row}>
           {SOCIAL_LINKS.map((link) => (
             <a
@@ -74,6 +82,9 @@ export default function Footer() {
               {link.icon}
             </a>
           ))}
+          <a className={styles.admin} href="/admin/login">
+            Admin ↗
+          </a>
         </div>
       </div>
     </footer>

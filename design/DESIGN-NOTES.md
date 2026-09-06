@@ -1,5 +1,35 @@
 # Design Notes
 
+## Active direction — 2026-09-05 public UI refresh
+
+User authorized a full modern redesign. Use a single quiet ink/forest diagonal
+gradient, warm off-white text, pale green actions, Inter, and an editorial layout.
+The original logo and official social marks remain; no new imagery is required.
+
+- Header: compact logo and four public links; admin access moves to the footer.
+- Hero: left-aligned headline and assessment CTA; three concise approach steps
+  on the right. Stack below 768px.
+- About: split heading and copy, stacked on mobile.
+- Services: four open columns, two below 1024px, one below 421px.
+- Assessment: persistent introduction beside a continuous grouped form on
+  desktop; single column below 768px. Preserve questions, options, payload,
+  validation, and success behavior. Use opaque, full-width inputs.
+- Contact: high-contrast dialog, scrollable within short viewports.
+- Footer: brand, existing social links, and admin access.
+- Restrained hover states, visible keyboard focus, reduced-motion support.
+
+This direction supersedes historical V2 visual specifications, including exact
+hero copy, centered boxed sections, pill-shaped fields, and the saturated
+gradient. It does not change backend or data requirements.
+
+Verification: desktop/mobile screenshots checked; no horizontal overflow at
+375, 768, 1024, or 1440px. Local lint, TypeScript, and production build pass;
+Vercel Preview builds and serves HTTP 200. Axe reports zero violations (gradient
+contrast requires manual evaluation; muted text exceeds 8:1 against the
+lightest background stop). Contact validation and Escape focus restoration
+pass. Both forms show success and reset with controlled browser API responses;
+this UI-only check adds no database rows. Backend logic is unchanged from V3.
+
 ## Purpose
 
 This file documents visual design decisions, missing assets, and design-related questions that arise during development. Cursor must update this file when visual decisions are required and no approved asset exists.

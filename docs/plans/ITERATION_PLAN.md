@@ -1,5 +1,17 @@
 # Order of Execution
 
+## Active slice: public visual refresh (user requested after V3)
+
+- Goal: replace the dated public presentation with a modern, clear advisory site.
+- Scope: public components, CSS, page metadata, and design notes.
+- Non-goals: backend changes, schema changes, abuse controls, or admin features.
+- Acceptance: responsive at 375/768/1024/1440; working navigation, dialog,
+  form validation and submission; no new browser, lint, or build errors.
+- Verify: browser screenshots, overflow checks, keyboard/modal checks, and
+  form response checks. Keep Preview on development Supabase.
+- Decision impact: medium visual change; no architecture change.
+- This user instruction advances the public portion of V6.5 ahead of V4.
+
 ## Purpose
 
 This section defines the **exact build sequence** for BloomAdvisory.ai so we:

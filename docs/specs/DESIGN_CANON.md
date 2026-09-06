@@ -1,5 +1,9 @@
 # Design: Visual Canon
 
+The 2026-09-05 user-authorized public redesign in
+`design/DESIGN-NOTES.md` supersedes the historical V2 visual rules below.
+The dark, restrained, accessible, CSS-only principles still apply.
+
 ## Visual Design Canon (Source of Truth)
 
 This section defines the **non-negotiable visual rules** for the website**.

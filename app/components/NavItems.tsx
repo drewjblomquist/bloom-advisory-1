@@ -4,9 +4,8 @@ import styles from "./NavItems.module.css";
 const NAV_ITEMS = [
   { id: "about", label: "About", href: "#about" },
   { id: "services", label: "Services", href: "#services" },
-  { id: "questionnaire", label: "Questionnaire", href: "#questionnaire" },
+  { id: "questionnaire", label: "Assessment", href: "#questionnaire" },
   { id: "contact", label: "Contact Us", href: "#contact" },
-  { id: "admin", label: "Admin", href: "/admin/login" },
 ];
 
 type NavItemsProps = {
@@ -16,7 +15,7 @@ type NavItemsProps = {
 
 export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
   return (
-    <div className={styles.shell}>
+    <header className={styles.shell}>
       <a className={styles.logoLink} href="/" aria-label="Bloom Advisory home">
         <Image
           className={styles.logo}
@@ -31,9 +30,7 @@ export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
         <ul className={styles.list}>
           {NAV_ITEMS.map((item) => {
             const isActive = activeId === item.id;
-            const className = `${styles.link} ${
-              isActive ? styles.active : ""
-            }`;
+            const className = `${styles.link} ${isActive ? styles.active : ""}`;
 
             if (item.id === "contact" && onContactClick) {
               return (
@@ -61,6 +58,6 @@ export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
           })}
         </ul>
       </nav>
-    </div>
+    </header>
   );
 }

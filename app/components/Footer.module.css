@@ -1,73 +1,62 @@
 .footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 72px 0 96px;
-  box-sizing: border-box;
+  max-width: 1280px;
+  margin: auto;
+  padding: 40px 48px 48px;
 }
-
 .container {
-  width: 100%;
-  max-width: 1120px;
-  padding: 0 24px;
-  box-sizing: border-box;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
 }
-
+.brand {
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.tagline {
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
 .row {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  align-items: center;
 }
-
 .link {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: var(--muted);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  transition: transform 180ms ease-out, opacity 180ms ease-out,
-    border-color 180ms ease-out, background-color 180ms ease-out;
+  transition:
+    color 150ms,
+    background 150ms;
 }
-
 .link:hover {
-  transform: translateY(-2px) scale(1.04);
-  opacity: 0.9;
-  border-color: rgba(255, 255, 255, 0.35);
-  background-color: rgba(255, 255, 255, 0.16);
+  color: var(--accent);
+  background: var(--surface);
 }
-
-.link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
-  outline-offset: 3px;
-}
-
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 19px;
+  height: 19px;
 }
-
-@supports (
-  (-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))
-) {
-  .link {
-    background-color: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-  }
+.admin {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 18px;
+  padding: 12px 0;
 }
-
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .footer {
-    padding: 64px 0 80px;
-  }
-
-  .link {
-    width: 48px;
-    height: 48px;
+    padding: 24px 24px 40px;
   }
 }
