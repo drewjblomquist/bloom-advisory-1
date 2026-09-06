@@ -101,5 +101,5 @@ Contact modal submissions map to `contact_messages`:
 - Vercel Preview, Development, and local development use the development project; Production remains isolated on production Supabase.
 - Protected Vercel Preview deployed and verified through both form flows with no browser console errors; synthetic rows were removed.
 - Legacy production JWT-based API keys disabled after a repository, Git history, Vercel environment, and OAuth-app consumer audit. Legacy `apikey` requests return `401`; the modern publishable key still inserts and public reads remain blocked.
-- Vercel project runtime updated from deprecated Node.js 20.x to Node.js 24.x; a fresh Node.js 24.x Preview build is deployed and verified. Production deployment remains pending.
-- Remaining gate: deploy the verified working tree from `main` to production and verify both forms on `https://bloomadvisory.ai`.
+- Vercel project runtime updated from deprecated Node.js 20.x to Node.js 24.x; fresh Node.js 24.x Preview and Production builds are deployed and verified.
+- Production deployed from `main` and both live forms were verified on `https://bloomadvisory.ai`; each row landed in production with blank optional phone values stored as `null`, and the synthetic rows were removed.

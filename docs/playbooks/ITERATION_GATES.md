@@ -58,11 +58,11 @@ Every iteration must meet these criteria:
 
 ### V1 - Deploy Proof
 
-- [x] Next.js app deployed to Vercel (Code ready - pending push to main)
+- [x] Next.js app deployed to Vercel from `main`
 - [x] Custom domain configured and working (Done - confirmed by user)
 - [x] HTTPS active (Done - confirmed by user)
 - [x] Redirects working (http→https, www→apex) (Handled by Vercel infrastructure)
-- [x] Auto-deploy working (push to main triggers deploy) (Configured - will verify after first push)
+- [x] Auto-deploy working (push to `main` triggered the verified production deployment)
 
 ### V2 - UI Skeleton
 
@@ -87,7 +87,7 @@ _Plan and planning docs updated to match implementation when closing V2 (Questio
 - [x] Success message displays
 - [x] Public users cannot read submissions
 
-_Verified on 2026-09-05 against separate development and production Supabase projects. Preview and local browser flows write only to development; production REST checks confirm modern publishable-key inserts, legacy-key rejection, and blocked public reads. The current working tree is deployed and verified in Preview. Production deployment and form verification remain the global gate._
+_Verified on 2026-09-05 against separate development and production Supabase projects. Preview and local browser flows write only to development; production REST checks confirm modern publishable-key inserts, legacy-key rejection, and blocked public reads. Node.js 24.x Preview and Production deployments are verified. Both live production forms wrote the expected rows with blank optional phone values stored as `null`; all synthetic rows were removed and no production runtime errors were observed._
 
 ### V4 - Abuse Controls
 

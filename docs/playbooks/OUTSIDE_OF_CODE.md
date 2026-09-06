@@ -130,7 +130,7 @@ This checklist covers all tasks that must be completed **outside of the codebase
 - [x] Local end-to-end test submission successful against the production project; synthetic rows removed
 - [x] Preview end-to-end questionnaire and contact submissions successful against development; synthetic rows removed
 - [x] Legacy production API keys disabled; modern publishable-key insert and public-read denial verified
-- [ ] Production deployment and form submission verified
+- [x] Production deployment and form submission verified; synthetic rows removed
 
 ### V4 - Abuse Controls
 
