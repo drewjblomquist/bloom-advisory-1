@@ -78,14 +78,16 @@ _Plan and planning docs updated to match implementation when closing V2 (Questio
 
 ### V3 - Database Submission Pipeline
 
-- [ ] Supabase connection working
-- [ ] Table created with correct schema
-- [ ] Contact messages table created with correct schema
-- [ ] RLS policies configured
-- [ ] Form submission writes to database
-- [ ] Blank fields stored as `null`
-- [ ] Success message displays
-- [ ] Public users cannot read submissions
+- [x] Supabase connection working
+- [x] Table created with correct schema
+- [x] Contact messages table created with correct schema
+- [x] RLS policies configured
+- [x] Form submission writes to database
+- [x] Blank fields stored as `null`
+- [x] Success message displays
+- [x] Public users cannot read submissions
+
+_Verified on 2026-09-05 against separate development and production Supabase projects. Preview and local browser flows write only to development; production REST checks confirm modern publishable-key inserts, legacy-key rejection, and blocked public reads. The current working tree is deployed and verified in Preview. Production deployment and form verification remain the global gate._
 
 ### V4 - Abuse Controls
 

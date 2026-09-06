@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Contact.module.css";
 
 const INITIAL_FORM = {
@@ -51,6 +51,8 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -68,33 +70,56 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSubmitAttempted(false);
     setTouched({});
+    setSubmitError("");
     onClose();
-  };
+  }, [onClose]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitAttempted(true);
+    setSubmitError("");
 
     const currentErrors = validateForm(form);
     if (Object.keys(currentErrors).length > 0) {
       return;
     }
 
-    if (toastTimer.current) {
-      clearTimeout(toastTimer.current);
-    }
+    setIsSubmitting(true);
 
-    setForm(INITIAL_FORM);
-    setSubmitAttempted(false);
-    setTouched({});
-    onClose();
-    setShowToast(true);
-    toastTimer.current = setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        setSubmitError("We could not save your message. Please try again.");
+        return;
+      }
+
+      if (toastTimer.current) {
+        clearTimeout(toastTimer.current);
+      }
+
+      setForm(INITIAL_FORM);
+      setSubmitAttempted(false);
+      setTouched({});
+      onClose();
+      setShowToast(true);
+      toastTimer.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    } catch {
+      setSubmitError("We could not save your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -146,7 +171,7 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
       document.removeEventListener("keydown", handleKeyDown);
       previouslyFocused.current?.focus();
     };
-  }, [isOpen]);
+  }, [handleClose, isOpen]);
 
   return (
     <>
@@ -266,8 +291,18 @@ export default function Contact({ isOpen, onClose }: ContactProps) {
                 </span>
               </div>
 
-              <button type="submit" className={styles.submitButton}>
-                Send Message
+              {submitError && (
+                <p className={styles.submitError} role="alert">
+                  {submitError}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

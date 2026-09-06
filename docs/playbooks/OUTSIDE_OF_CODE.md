@@ -28,17 +28,17 @@ This checklist covers all tasks that must be completed **outside of the codebase
 - [ ] Vercel project created (Done)
 - [ ] GitHub repository connected to Vercel (Done)
 - [ ] Production branch set to `main` (Done)
-- [ ] Preview deployments enabled 
-- [ ] Build settings configured (Next.js)
-- [ ] Environment variables documented 
+- [x] Preview deployments enabled
+- [x] Build settings configured (Next.js, Node.js 24.x)
+- [x] V3 environment variables documented
 
 ### Environment Variables
 
-- [ ] Supabase project created
-- [ ] Supabase keys obtained:
-  - [ ] `NEXT_PUBLIC_SUPABASE_URL`
-  - [ ] `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-  - [ ] `SUPABASE_SERVICE_ROLE_KEY` (server-only)
+- [x] Supabase dev and production projects created
+- [x] V3 Supabase public values obtained:
+  - [x] `NEXT_PUBLIC_SUPABASE_URL`
+  - [x] `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+  - [ ] `SUPABASE_SECRET_KEY` (server-only)
 - [ ] Clerk application created
 - [ ] Clerk keys obtained:
   - [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
@@ -46,10 +46,11 @@ This checklist covers all tasks that must be completed **outside of the codebase
 - [ ] Turnstile keys obtained (V4):
   - [ ] `TURNSTILE_SITE_KEY`
   - [ ] `TURNSTILE_SECRET_KEY`
-- [ ] All environment variables added to Vercel:
-  - [ ] Production environment
-  - [ ] Preview environment
-- [ ] Local `.env.local` file created with all variables
+- [x] V3 environment variables added to Vercel:
+  - [x] Production environment uses production Supabase
+  - [x] Preview environment uses development Supabase
+  - [x] Development environment uses development Supabase
+- [x] Local `.env.local` created with development Supabase public values
 
 ### Privacy + Data Inventory
 
@@ -60,15 +61,15 @@ This checklist covers all tasks that must be completed **outside of the codebase
 
 ### Supabase (Infra)
 
-- [ ] Supabase project created
-- [ ] Separate Supabase projects created:
-  - [ ] `dev` for local + preview
-  - [ ] `prod` for production only
-- [ ] Database schema created (appropriate for current iteration)
-- [ ] RLS policies configured
+- [x] Supabase project created
+- [x] Separate Supabase projects created:
+  - [x] `dev` for local + preview
+  - [x] `prod` for production only
+- [x] Database schema created (appropriate for current iteration)
+- [x] RLS policies configured
 - [ ] Admin allowlist table created (`admin_users`)
 - [ ] Initial admin user added to `admin_users` table (after V5)
-- [ ] Supabase Auth is **not** configured or used
+- [x] Supabase Auth is **not** configured or used by the application
 
 ### Clerk Setup
 
@@ -119,12 +120,17 @@ This checklist covers all tasks that must be completed **outside of the codebase
 
 ### V3 - Database Setup
 
-- [ ] Supabase project created
-- [ ] `questionnaire_submissions_v1` table created
-- [ ] `contact_messages` table created
-- [ ] RLS policies configured
-- [ ] Environment variables set in Vercel
-- [ ] Test submission successful
+- [x] Production Supabase project created and resumed
+- [x] Separate development Supabase project created
+- [x] `questionnaire_submissions_v1` table created
+- [x] `contact_messages` table created
+- [x] RLS policies configured
+- [x] Production environment variables set in Vercel
+- [x] Preview and Development environment variables set to the development Supabase project
+- [x] Local end-to-end test submission successful against the production project; synthetic rows removed
+- [x] Preview end-to-end questionnaire and contact submissions successful against development; synthetic rows removed
+- [x] Legacy production API keys disabled; modern publishable-key insert and public-read denial verified
+- [ ] Production deployment and form submission verified
 
 ### V4 - Abuse Controls
 

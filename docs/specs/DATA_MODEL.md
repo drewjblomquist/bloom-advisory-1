@@ -60,8 +60,8 @@ Public (unauthenticated) access is allowed only where explicitly intended:
 
 **Key design rule:**
 
-- The browser uses the **Supabase anon key** and is constrained by RLS.
-- Admin-only access uses server-side API routes with the **service role key** (never exposed to the client).
+- Public writes use a **Supabase publishable key** and are constrained by RLS as the `anon` role.
+- Admin-only access uses server-side API routes with a **secret key** mapped to the `service_role` role (never exposed to the client).
 
 ## Data Model Overview
 
@@ -267,7 +267,7 @@ Admins can:
     - `answers`
     - `contact_messages`
 
-Admin access is enforced by the application layer and executed server-side using the service role key (see `docs/decisions/ADR-0006-supabase-access-pattern.md`).
+Admin access is enforced by the application layer and executed server-side using a Supabase secret key (see `docs/decisions/ADR-0006-supabase-access-pattern.md`).
 
 **Admin check pattern (conceptual):**
 

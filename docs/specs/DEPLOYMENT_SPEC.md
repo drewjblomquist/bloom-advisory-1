@@ -89,7 +89,7 @@ Preview deployments must point to the **dev** Supabase project (see `docs/decisi
 This list is illustrative and must be kept up to date as the system evolves:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
 - `TURNSTILE_SITE_KEY`
@@ -311,8 +311,9 @@ BloomAdvisory.ai V1 is a single public marketing page with a protected admin sur
 
 **V1 environment strategy**
 
-- **One Supabase project** is used for Production and Preview deployments in V1.
-- Preview deployments must have all required env vars present to build successfully.
+- Two Supabase projects are used: development for Local/Preview and production for Production.
+- Preview deployments must have all required development-project env vars present to build successfully.
+- Production Supabase values must never be assigned to Preview or Development.
 
 **Required env var categories (non-exhaustive)**
 
@@ -345,6 +346,6 @@ BloomAdvisory.ai V1 is a single public marketing page with a protected admin sur
 
 - Multi-domain support beyond canonical + optional www redirect
 - Subdomain architecture (e.g., `admin.`) in V1
-- Separate staging Supabase project in V1
+- A third Supabase project dedicated only to staging in V1
 - Customer authentication or customer portal implementation in V1
 - Complex role-based access controls beyond allowlisted admin Clerk user IDs in V1

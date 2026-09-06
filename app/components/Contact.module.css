@@ -213,9 +213,22 @@
   border-color: rgba(255, 255, 255, 0.28);
 }
 
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
 .submitButton:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.55);
   outline-offset: 2px;
+}
+
+.submitError {
+  margin: 0;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  color: #ffd6d6;
 }
 
 .toastWrap {
@@ -286,4 +299,3 @@
     padding: 112px 0;
   }
 }
-

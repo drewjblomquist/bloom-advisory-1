@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./NavItems.module.css";
 
 const NAV_ITEMS = [
@@ -17,10 +18,13 @@ export default function NavItems({ activeId, onContactClick }: NavItemsProps) {
   return (
     <div className={styles.shell}>
       <a className={styles.logoLink} href="/" aria-label="Bloom Advisory home">
-        <img
+        <Image
           className={styles.logo}
           src="/images/brand/Bloom%20Advisory.svg"
           alt="Bloom Advisory"
+          width={465}
+          height={62}
+          priority
         />
       </a>
       <nav className={styles.nav} aria-label="Primary">

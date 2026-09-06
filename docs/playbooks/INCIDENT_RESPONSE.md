@@ -19,7 +19,7 @@ Provide a simple, repeatable response if admin access is compromised or a secret
 
 2. **Rotate secrets**
    - Clerk: rotate `CLERK_SECRET_KEY`
-   - Supabase: rotate `SUPABASE_SERVICE_ROLE_KEY` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - Supabase: rotate `SUPABASE_SECRET_KEY` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
    - Turnstile: rotate site/secret keys
    - Update Vercel env vars (Preview + Production)
 

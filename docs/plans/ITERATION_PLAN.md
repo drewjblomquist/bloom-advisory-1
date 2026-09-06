@@ -125,13 +125,13 @@ Make the questionnaire **actually submit** and land in Supabase reliably.
 - Create Supabase project
 - Add env vars in Vercel:
     - `NEXT_PUBLIC_SUPABASE_URL`
-    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - Create table: `questionnaire_submissions_v1` with columns matching your 12 fields + `submitted_at`
 - Create table: `contact_messages` for contact modal submissions
 - Add public insert (RLS configured to allow insert-only; no read)
 - Implement submission from UI:
-    - All fields optional
-    - Blank fields written as `null`
+    - Requiredness follows `docs/plans/UI_V2_PLANNING_GUIDE.md`
+    - Blank optional fields written as `null`
     - Success message shown after submit
 
 ### Strong recommendation (best practice)

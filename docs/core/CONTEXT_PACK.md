@@ -34,6 +34,7 @@
 
 ## Agent Rules
 
+- Read `docs/core/CONSTRAINTS.md` before planning
 - Read `docs/core/DOC_INDEX.md` before planning
 - Implement only the current iteration scope
 - If plan diverges: update the iteration plan and add an ADR if architecture is impacted

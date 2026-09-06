@@ -319,7 +319,7 @@ Decisions Made:
 - Contact validation: inline; neutral professional tone.
 - Contact success: close modal + centered toast ~3s with exact text "Thank you for your response."
 - Footer socials centered horizontally.
-- Footer socials include only Instagram + X.
+- Footer socials include Instagram, X, and Substack.
 - Footer style: subtle circular icon buttons.
 - Footer hover motion: subtle lift + scale.
 - Footer external link behavior: new tab + safe rel attributes.

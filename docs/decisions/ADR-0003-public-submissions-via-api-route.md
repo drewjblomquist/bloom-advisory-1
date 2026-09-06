@@ -5,12 +5,12 @@
 
 ## Context
 
-Questionnaire submissions need to be written to Supabase. Two approaches: (1) write directly from client to Supabase using anon key, or (2) submit via Next.js API route that writes to Supabase.
+Questionnaire submissions need to be written to Supabase. Two approaches: (1) write directly from the client to Supabase using a publishable key, or (2) submit via a Next.js API route that writes to Supabase.
 
 ## Options Considered
 
 1. **Direct client write to Supabase**
-   - Client uses `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - Client uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
    - RLS policies control access
    - Simpler implementation (no API route needed)
    - Client code directly calls Supabase
@@ -43,7 +43,7 @@ Submit questionnaire data via a **Next.js API route** (server boundary) rather t
 - Server-side validation before database write
 - Easy addition of rate limiting and abuse controls
 - Server-side logging (structured, no PII)
-- Can use service role key if needed (never exposed to client)
+- Can use a secret key with the `service_role` role if needed (never exposed to client)
 - Easier to add CAPTCHA/bot detection later
 
 ### What this limits
@@ -55,7 +55,7 @@ Submit questionnaire data via a **Next.js API route** (server boundary) rather t
 ### What we must remember later
 
 - All public write operations should go through API routes
-- Never expose service role key to client
+- Never expose a secret/service-role key to the client
 - Validate all inputs server-side
 - Log submission attempts (success and failure) with structured logging
 

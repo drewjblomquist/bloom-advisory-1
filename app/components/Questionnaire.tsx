@@ -147,7 +147,9 @@ export default function Questionnaire() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showToast, setShowToast] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const errors = useMemo(() => validateForm(form), [form]);
@@ -207,24 +209,48 @@ export default function Questionnaire() {
     );
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitAttempted(true);
+    setSubmitError("");
 
     const currentErrors = validateForm(form);
     if (Object.keys(currentErrors).length > 0) {
       return;
     }
 
-    if (toastTimer.current) {
-      clearTimeout(toastTimer.current);
-    }
+    setIsSubmitting(true);
 
-    setShowToast(true);
-    setSubmitAttempted(false);
-    toastTimer.current = setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+    try {
+      const response = await fetch("/api/questionnaire", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        setSubmitError("We could not save your response. Please try again.");
+        return;
+      }
+
+      if (toastTimer.current) {
+        clearTimeout(toastTimer.current);
+      }
+
+      setForm(INITIAL_FORM);
+      setTouched({});
+      setShowToast(true);
+      setSubmitAttempted(false);
+      toastTimer.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    } catch {
+      setSubmitError("We could not save your response. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const hasCompanyTypeOther = form.companyType === "Other";
@@ -691,8 +717,18 @@ export default function Questionnaire() {
               </span>
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              Submit
+            {submitError && (
+              <p className={styles.submitError} role="alert">
+                {submitError}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>

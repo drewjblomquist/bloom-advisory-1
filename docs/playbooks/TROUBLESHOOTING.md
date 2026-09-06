@@ -70,7 +70,7 @@ This runbook provides common troubleshooting steps for issues that may arise dur
 
 **Solutions:**
 1. Verify Supabase project is not paused
-2. Check API keys are correct (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`)
+2. Check API keys are correct (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`)
 3. Verify RLS policies allow your operations
 4. Check network connectivity
 5. Verify you're using the correct Supabase client (anon vs service role)

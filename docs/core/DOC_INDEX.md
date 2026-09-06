@@ -2,6 +2,7 @@
 
 ## Always Read
 
+- `docs/core/CONSTRAINTS.md`
 - `docs/core/CONTEXT_PACK.md`
 - `docs/playbooks/ITERATION_GATES.md`
 

@@ -31,8 +31,8 @@ Repeat this for both `dev` and `prod` projects. Use `dev` for local and preview,
 1. Go to Project Settings → API
 2. Copy the following:
    - Project URL (e.g., `https://xxxxx.supabase.co`)
-   - `anon` `public` key (this is `NEXT_PUBLIC_SUPABASE_ANON_KEY`)
-   - `service_role` `secret` key (this is `SUPABASE_SERVICE_ROLE_KEY` - **never expose to client**)
+   - Publishable key (`sb_publishable_...`; this is `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`)
+   - Secret key (`sb_secret_...`; this is `SUPABASE_SECRET_KEY` - **never expose to client**)
 
 ### 3. Create Database Schema
 
@@ -60,15 +60,24 @@ CREATE TABLE questionnaire_submissions_v1 (
 );
 ```
 
+Notes:
+
+- Questionnaire fields are required at the application level (see `docs/plans/UI_V2_PLANNING_GUIDE.md`).
+- Do not collect or retain IP address or user agent (store `null` if columns exist).
+
 3. Enable RLS:
 
 ```sql
 ALTER TABLE questionnaire_submissions_v1 ENABLE ROW LEVEL SECURITY;
 ```
 
-4. Create policy for public inserts (no reads):
+4. Restrict table grants and create a policy for public inserts (no reads):
 
 ```sql
+REVOKE ALL ON TABLE questionnaire_submissions_v1 FROM PUBLIC, anon, authenticated;
+GRANT INSERT ON TABLE questionnaire_submissions_v1 TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE questionnaire_submissions_v1 TO service_role;
+
 CREATE POLICY "Allow public inserts" ON questionnaire_submissions_v1
   FOR INSERT
   TO anon
@@ -83,11 +92,17 @@ CREATE POLICY "Allow public inserts" ON questionnaire_submissions_v1
 CREATE TABLE contact_messages (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT,
+  phone_number TEXT,
   message TEXT,
-  user_agent TEXT,
-  source TEXT,
   submitted_at TIMESTAMPTZ DEFAULT NOW()
 );
+```
+
+If the table already exists without `phone_number`, apply this additive migration:
+
+```sql
+ALTER TABLE contact_messages
+  ADD COLUMN IF NOT EXISTS phone_number TEXT;
 ```
 
 2. Enable RLS:
@@ -96,9 +111,13 @@ CREATE TABLE contact_messages (
 ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
 ```
 
-3. Create policy for public inserts (no reads):
+3. Restrict table grants and create a policy for public inserts (no reads):
 
 ```sql
+REVOKE ALL ON TABLE contact_messages FROM PUBLIC, anon, authenticated;
+GRANT INSERT ON TABLE contact_messages TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE contact_messages TO service_role;
+
 CREATE POLICY "Allow public inserts" ON contact_messages
   FOR INSERT
   TO anon
@@ -125,7 +144,7 @@ CREATE TABLE admin_users (
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 ```
 
-3. Do not add any public policies. Admin checks must run server-side with the service role key (Clerk is the auth system; Supabase Auth is not used).
+3. Do not add any public policies. Admin checks must run server-side with the secret key (Clerk is the auth system; Supabase Auth is not used).
 
 #### V8: Site Content Table
 
@@ -151,7 +170,7 @@ CREATE POLICY "Public can read site_content" ON site_content
   TO anon
   USING (true);
 
--- Admin writes happen server-side with the service role key.
+-- Admin writes happen server-side with the Supabase secret key.
 ```
 
 #### V9: Versioned Questionnaire Schema
@@ -195,9 +214,6 @@ CREATE TABLE submissions (
   respondent_email TEXT,
   respondent_company TEXT,
   respondent_role TEXT,
-  source TEXT,
-  user_agent TEXT,
-  ip_address INET,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ```
@@ -221,7 +237,7 @@ CREATE TABLE answers (
 Follow the security model defined in `docs/specs/SECURITY_PRIVACY.md`:
 
 - Public users: INSERT only on submissions and contact messages (no SELECT)
-- Admins: Full access via server-side API routes using the service role key
+- Admins: Full access via server-side API routes using the secret key
 
 ### 5. Add Initial Admin User
 
@@ -238,8 +254,10 @@ VALUES ('clerk_user_id_here', 'your-email@example.com', 'admin');
 Add to Vercel (and local `.env`):
 
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY` (server-only, never expose to client)
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY` (server-only, never expose to client)
+
+V3 public form API routes use the publishable key so insert-only RLS for the `anon` role remains enforced. Reserve the secret key for authenticated server-side admin operations in V6 and later.
 
 ## Verification Checklist
 
@@ -258,7 +276,7 @@ Add to Vercel (and local `.env`):
 ### RLS blocking inserts
 
 - Check policies are correct
-- Verify you're using the correct Supabase client (anon key for public, service role for admin)
+- Verify you're using the correct Supabase key (publishable key for public, secret key for admin)
 - Check policy conditions match your use case
 
 ### Connection errors
@@ -275,10 +293,10 @@ Add to Vercel (and local `.env`):
 
 ## Security Notes
 
-- **Never commit** service role key to repository
-- **Never expose** service role key to client-side code
-- Use anon key for public operations
-- Use service role key only in server-side API routes
+- **Never commit** the secret key to the repository
+- **Never expose** the secret key to client-side code
+- Use the publishable key for public operations
+- Use the secret key only in authorized server-side API routes
 - Regularly rotate keys if compromised
 
 ## Future Updates

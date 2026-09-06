@@ -9,10 +9,10 @@ Clerk is the only authentication system. Supabase Auth is not used. Admin access
 
 ## Options Considered
 
-1. **Server-side admin access using the Supabase service role key (chosen)**
+1. **Server-side admin access using a Supabase secret key with the `service_role` role (chosen)**
    - Admin checks are done in the app (Clerk session + `admin_users` allowlist)
-   - Server-side API routes use the service role key
-   - Public forms use anon key with insert-only RLS policies
+   - Server-side admin API routes use the secret key
+   - Public forms use a publishable key with insert-only RLS policies for the `anon` role
 
 2. **JWT-based RLS with custom tokens**
    - Create custom JWTs to map Clerk identities into Supabase RLS
@@ -23,7 +23,7 @@ Clerk is the only authentication system. Supabase Auth is not used. Admin access
 
 ## Decision
 
-Use **server-side admin access with the Supabase service role key**, and **anon insert-only policies** for public forms.
+Use **server-side admin access with a Supabase secret key**, and **`anon` insert-only policies enforced through a publishable key** for public forms.
 
 ## Rationale
 
@@ -42,11 +42,11 @@ Use **server-side admin access with the Supabase service role key**, and **anon 
 ### What this limits
 
 - Admin data access must always go through server-side routes
-- Requires careful handling of service role key
+- Requires careful handling of the secret key
 
 ### What we must remember later
 
-- Never expose the service role key to client code
+- Never expose the secret key to client code
 - Keep public RLS policies limited to insert-only
 - All admin reads/writes must be server-side
 

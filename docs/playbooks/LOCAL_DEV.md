@@ -40,8 +40,8 @@ cp .env.example .env.local  # if example exists
 ```
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co  # dev project
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...  # server-only, never expose
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+SUPABASE_SECRET_KEY=sb_secret_...  # server-only, never expose
 
 # Clerk
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...

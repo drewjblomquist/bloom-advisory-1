@@ -64,11 +64,12 @@ This runbook covers the complete process of deploying the Bloom Advisors website
 1. In Vercel project settings, go to "Environment Variables"
 2. Add all required variables for Production:
    - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
    - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
    - `CLERK_SECRET_KEY`
    - Any other required variables
-3. Also add for Preview environment (use same values in V1)
+3. Add the same variable names for Preview and Development, but use the separate development Supabase project's values. Production must use only production Supabase values.
+4. Set the Vercel project Node.js version to `24.x`.
 
 ### 7. Trigger First Deployment
 
