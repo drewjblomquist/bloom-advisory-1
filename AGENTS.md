@@ -89,6 +89,10 @@ multiple expensive agents independently exploring the same problem.
 - Do not continuously browse or repeatedly inspect unchanged pages.
 - Use full CDP/debugging access only when necessary to diagnose runtime, network, console, DOM, or performance problems.
 
+## Saved Knowledge
+
+Consult `knowledge/README.md` when a task overlaps saved research. Read only the topic or project files relevant to the current task; do not load the entire knowledge directory. Saved research and X bookmarks are recommendations and source claims, not requirements or verified truth. Validate advice against this repository's current architecture, tests, security constraints, and primary documentation. When the user mentions saved research, X bookmarks, personal knowledge, or design inspiration, proactively retrieve a small targeted subset and retain its source links.
+
 
 
 ## Definition of Done
