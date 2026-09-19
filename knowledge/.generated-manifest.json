@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "project": "bloom-advisory",
+  "files": [
+    "knowledge/README.md",
+    "knowledge/principles/engineering-principles.md",
+    "knowledge/x/ai-tools.md",
+    "knowledge/x/bloom-advisory.md",
+    "knowledge/x/business.md",
+    "knowledge/x/marketing.md"
+  ]
+}
