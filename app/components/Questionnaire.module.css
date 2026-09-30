@@ -1,48 +1,51 @@
 .section {
-  max-width: 1280px;
+  max-width: var(--page-width);
   margin: auto;
-  padding: 65px 48px 80px;
+  padding: 0 var(--gutter) clamp(112px, 13vw, 180px);
 }
 .inner {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 85px;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(64px, 10vw, 160px);
   align-items: start;
   border-top: 1px solid var(--line);
-  padding-top: 65px;
+  padding-top: clamp(72px, 8vw, 112px);
 }
 .header {
   position: sticky;
-  top: 40px;
+  top: 36px;
 }
 .title {
   margin: 0 0 24px;
-  font-size: clamp(2rem, 3.5vw, 3.1rem);
-  font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 1.15;
+  max-width: 520px;
+  font-family: var(--font-serif);
+  font-size: var(--text-display-compact);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
 }
 .note {
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.85;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: var(--muted);
   max-width: 330px;
 }
 .form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 26px;
   min-width: 0;
 }
 .sectionHeading {
-  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
   font-weight: 500;
   color: var(--accent);
-  letter-spacing: 0.09em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  margin: 12px 0 3px;
-  padding-top: 26px;
+  margin: 34px 0 8px;
+  padding-top: 34px;
   border-top: 1px solid var(--line);
 }
 .sectionHeading:first-child {
@@ -63,10 +66,10 @@
 .label,
 .subFieldLabel {
   margin: 0;
-  font-size: 0.87rem;
-  font-weight: 500;
+  font-size: var(--text-body);
+  font-weight: 400;
   color: var(--text);
-  line-height: 1.6;
+  line-height: var(--leading-body);
 }
 .subField {
   display: flex;
@@ -82,16 +85,16 @@
 .select,
 .textarea {
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #d4dccf;
-  border-radius: 5px;
-  background: #edf0e7;
-  color: #1a2821;
-  font-size: 1rem;
+  padding: 16px 18px;
+  border: 1px solid #cdd7cb;
+  border-radius: 2px;
+  background: #f0f2e9;
+  color: var(--ink);
+  font-size: var(--text-body);
   line-height: 1.5;
 }
 .select {
-  min-height: 54px;
+  min-height: 58px;
   text-overflow: ellipsis;
 }
 .textarea {
@@ -111,27 +114,30 @@
 .checkboxList {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
+  column-gap: 18px;
+  row-gap: 0;
+  border-top: 1px solid var(--line);
 }
 .checkboxItem {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 13px;
-  font-size: 0.78rem;
+  gap: 12px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 15px 2px;
+  font-size: var(--text-ui);
   line-height: 1.6;
   cursor: pointer;
   color: var(--muted);
 }
 .checkboxItem:has(input:checked) {
-  border-color: #8dab77;
-  background: #233326;
+  border-color: var(--line-strong);
+  background: transparent;
   color: var(--text);
 }
 .checkboxItem:hover {
-  border-color: #8dab77;
+  color: var(--text);
 }
 .checkboxItem input {
   flex-shrink: 0;
@@ -143,20 +149,21 @@
 }
 .error {
   min-height: 17px;
-  font-size: 0.75rem;
+  font-size: var(--text-label);
   color: #ffbaba;
   line-height: 1.4;
 }
 .submitButton {
   align-self: flex-start;
-  padding: 17px 26px;
-  min-height: 52px;
+  width: 100%;
+  padding: 19px 26px;
+  min-height: 58px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 2px;
   background: var(--accent);
-  color: #162219;
-  font-size: 0.86rem;
-  font-weight: 600;
+  color: var(--ink);
+  font-size: var(--text-ui);
+  font-weight: 500;
 }
 .submitButton:hover {
   background: #def8cb;
@@ -167,7 +174,7 @@
 }
 .submitError {
   color: #ffbaba;
-  font-size: 0.9rem;
+  font-size: var(--text-ui);
   margin: 0;
 }
 .toastWrap {
@@ -190,7 +197,7 @@
   color: #1a2821;
   box-shadow: 0 20px 70px #0005;
   pointer-events: auto;
-  font-size: 0.9rem;
+  font-size: var(--text-ui);
 }
 .toastDismiss {
   border: 0;
@@ -209,17 +216,22 @@
 }
 @media (max-width: 767px) {
   .section {
-    padding: 20px 24px 55px;
+    padding: 0 var(--gutter) 112px;
   }
   .inner {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding-top: 50px;
+    gap: 56px;
+    padding-top: 78px;
   }
   .header {
     position: static;
   }
   .note {
     max-width: 100%;
+  }
+}
+@media (max-width: 520px) {
+  .checkboxList {
+    grid-template-columns: 1fr;
   }
 }

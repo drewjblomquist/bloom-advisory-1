@@ -1,56 +1,74 @@
 .section {
-  max-width: 1280px;
+  max-width: var(--page-width);
   margin: auto;
-  padding: 65px 48px 100px;
+  padding: 0 var(--gutter) var(--section-space);
 }
 .header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 32px;
-  margin-bottom: 46px;
+  margin-bottom: clamp(64px, 7vw, 96px);
 }
 .header h2 {
   margin: 0;
-  font-size: clamp(2rem, 3.5vw, 3.1rem);
-  font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 1.16;
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
 }
 .header p {
   color: var(--muted);
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   margin: 0;
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(48px, 8vw, 128px);
+  row-gap: 0;
+  border-bottom: 1px solid var(--line);
 }
 .service {
   border-top: 1px solid var(--line);
-  padding-top: 22px;
+  min-height: 280px;
+  padding: 28px 0 38px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
 }
 .number {
   color: var(--accent);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
 }
 .service h3 {
-  font-size: 1.3rem;
+  font-family: var(--font-serif);
+  font-size: var(--text-heading);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  margin: 28px 0 15px;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  margin: 0 0 26px;
 }
 .service p {
   color: var(--muted);
-  font-size: 0.87rem;
-  line-height: 1.8;
-  margin: 0 0 25px;
+  max-width: 420px;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  margin: 0 0 34px;
+  grid-column: 2;
 }
 .detail {
-  font-size: 0.68rem;
+  font-size: var(--text-label);
+  font-weight: 500;
   color: var(--accent);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  grid-column: 2;
 }
 @media (max-width: 1023px) {
   .grid {
@@ -60,19 +78,17 @@
 }
 @media (max-width: 767px) {
   .section {
-    padding: 50px 24px 65px;
+    padding: 0 var(--gutter) 104px;
   }
   .header {
     align-items: flex-start;
     flex-direction: column;
     gap: 20px;
   }
-}
-@media (max-width: 420px) {
   .grid {
     grid-template-columns: 1fr;
   }
-  .service h3 {
-    margin-top: 20px;
+  .service {
+    min-height: 235px;
   }
 }

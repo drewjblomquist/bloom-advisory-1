@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./Footer.module.css";
 
 const SOCIAL_LINKS = [
@@ -63,7 +64,13 @@ export default function Footer() {
       <div className={styles.container}>
         <div>
           <a href="/" className={styles.brand}>
-            Bloom Advisory
+            <Image
+              className={styles.logo}
+              src="/images/brand/bloom-advisory.png"
+              alt="Bloom Advisory"
+              width={980}
+              height={420}
+            />
           </a>
           <p className={styles.tagline}>
             A little clarity. A lot more possibility.

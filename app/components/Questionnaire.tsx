@@ -280,12 +280,14 @@ export default function Questionnaire() {
       <div className={styles.container}>
         <div className={styles.inner}>
           <header className={styles.header}>
-            <p className="eyebrow">03 / Your next chapter starts here</p>
+            <p className="eyebrow">03 / Start with the friction</p>
             <h2 id="questionnaire-title" className={styles.title}>
-              Assessment of Current Processes
+              Find the right place to begin.
             </h2>
             <p className={styles.note}>
-              This short quiz helps us understand where we can help give you back time, money, and clarity in your business.
+              Tell us how work moves through your business today. We’ll use
+              your answers to identify where a simpler system could create the
+              most value.
             </p>
           </header>
 

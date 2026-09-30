@@ -25,11 +25,11 @@
 
 .title {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: var(--text-heading);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
   color: #fff;
   text-align: center;
 }

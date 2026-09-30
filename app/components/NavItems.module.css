@@ -1,22 +1,12 @@
 .shell {
-  max-width: 1280px;
+  max-width: var(--page-width);
   width: 100%;
-  padding: 28px 48px;
+  padding: 30px var(--gutter);
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 24px;
-}
-.logoLink {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.logo {
-  display: block;
-  width: 190px;
-  height: auto;
 }
 .nav {
   display: flex;
@@ -24,7 +14,7 @@
 .list {
   list-style: none;
   display: flex;
-  gap: 22px;
+  gap: clamp(18px, 2.5vw, 36px);
   align-items: center;
   padding: 0;
   margin: 0;
@@ -37,7 +27,9 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: 0.75rem;
+  font-size: var(--text-ui);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--muted);
 }
@@ -46,9 +38,9 @@
   color: var(--accent);
 }
 .button {
-  padding: 0 20px;
-  border: 1px solid #60715f;
-  border-radius: 5px;
+  padding: 0 21px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
   background: transparent;
   color: var(--text);
   transition: background 150ms;
@@ -58,26 +50,26 @@
 }
 @media (max-width: 767px) {
   .shell {
-    padding: 24px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  .logo {
-    width: 168px;
-  }
-  .nav {
-    width: 100%;
+    padding: 22px var(--gutter);
+    gap: 16px;
   }
   .list {
-    width: 100%;
-    justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
   }
   .link,
   .button {
-    font-size: 0.7rem;
+    font-size: var(--text-label);
+  }
+  .item:nth-child(1),
+  .item:nth-child(2) {
+    display: none;
   }
   .button {
-    padding: 0 13px;
+    padding: 0 14px;
+  }
+}
+@media (max-width: 420px) {
+  .item:nth-child(3) {
+    display: none;
   }
 }

@@ -6,7 +6,7 @@ export default function About() {
       className={styles.section}
       aria-labelledby="about-title"
     >
-      <p className="eyebrow">01 / A little clarity goes a long way</p>
+      <p className="eyebrow">01 / Why Bloom</p>
       <div className={styles.grid}>
         <h2 id="about-title" className={styles.title}>
           Technology should
@@ -15,17 +15,15 @@ export default function About() {
         </h2>
         <div className={styles.copy}>
           <p>
-            More software isn’t always the answer. Better-connected tools,
-            simpler processes, and a clear plan can make all the difference.
+            Technology is changing quickly, and so is what’s possible for your
+            business. You shouldn’t have to spend your week keeping up with
+            every new tool and trend. That’s where we come in.
           </p>
           <p>
-            Bloom Advisory helps small and mid-sized businesses untangle the
-            work behind the work. We identify your biggest pain points, build a
-            practical roadmap, and stay with you through implementation.
+            We learn how your business works, find the processes taking up your
+            team’s time, and see where technology can help. Then we build it
+            with you and make sure it keeps working as your business grows.
           </p>
-          <a href="#questionnaire">
-            Let’s start with your business <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </div>
     </section>

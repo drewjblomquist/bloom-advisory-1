@@ -1,10 +1,31 @@
 :root {
-  --bg: #0c1516;
-  --surface: #152323;
-  --text: #f3f3e9;
-  --muted: #b0bdb5;
-  --accent: #c7edaa;
-  --line: #31403b;
+  --bg: #081210;
+  --surface: #11221c;
+  --surface-strong: #182c24;
+  --text: #f3f1e8;
+  --muted: #aab7af;
+  --accent: #d2f6ad;
+  --accent-strong: #e3ffc8;
+  --ink: #102018;
+  --line: rgba(214, 231, 219, 0.19);
+  --line-strong: rgba(214, 231, 219, 0.34);
+  --page-width: 1320px;
+  --gutter: clamp(24px, 4vw, 64px);
+  --section-space: clamp(96px, 12vw, 176px);
+  --font-serif: Georgia, serif;
+  --font-sans: Arial, sans-serif;
+  --text-label: 0.75rem;
+  --text-ui: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: clamp(1.125rem, 1.6vw, 1.35rem);
+  --text-heading: clamp(1.75rem, 2.4vw, 2.5rem);
+  --text-hero-heading: clamp(2.25rem, 3.1vw, 2.75rem);
+  --text-display: clamp(3rem, 5.2vw, 5.25rem);
+  --text-display-compact: clamp(2.4rem, 4.8vw, 4.75rem);
+  --leading-tight: 0.98;
+  --leading-body: 1.7;
+  --tracking-display: -0.055em;
+  --tracking-label: 0.16em;
 }
 * {
   box-sizing: border-box;
@@ -14,11 +35,41 @@ html {
   scroll-padding-top: 32px;
 }
 body {
+  --font-serif: var(--font-bloom), Georgia, serif;
+  --font-sans: var(--font-inter), Arial, sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, #0c151b 0%, #14241d 51%, #0c151b 100%);
+  position: relative;
+  isolation: isolate;
+  background: #07100e;
   color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+body::before {
+  z-index: -2;
+  background: url("/images/backgrounds/bloom-mountain-oil.webp") 58% center / cover no-repeat;
+  opacity: 0.72;
+}
+body::after {
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(7, 16, 20, 0.81) 0%,
+    rgba(14, 34, 25, 0.72) 52%,
+    rgba(7, 16, 14, 0.84) 100%
+  );
 }
 button,
 input,
@@ -41,11 +92,11 @@ button {
   color: var(--bg);
 }
 .eyebrow {
-  margin: 0 0 24px;
+  margin: 0 0 clamp(28px, 4vw, 52px);
   color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 .skip-link {
@@ -69,5 +120,19 @@ button {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+@media (max-width: 767px) {
+  body::before {
+    background-position: 64% center;
+    opacity: 0.62;
+  }
+  body::after {
+    background: linear-gradient(
+      155deg,
+      rgba(7, 16, 20, 0.86) 0%,
+      rgba(14, 34, 25, 0.78) 54%,
+      rgba(7, 16, 14, 0.88) 100%
+    );
   }
 }
