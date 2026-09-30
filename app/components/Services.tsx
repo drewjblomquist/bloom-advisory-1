@@ -38,11 +38,6 @@ export default function Services() {
           Better systems.
           <br />A better day at work.
         </h2>
-        <p>
-          Focused improvements.
-          <br />
-          Built around the way you work.
-        </p>
       </div>
       <div className={styles.grid}>
         {SERVICES.map((service, index) => (

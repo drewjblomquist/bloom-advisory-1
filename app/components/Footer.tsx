@@ -72,9 +72,6 @@ export default function Footer() {
               height={420}
             />
           </a>
-          <p className={styles.tagline}>
-            A little clarity. A lot more possibility.
-          </p>
         </div>
         <div className={styles.row}>
           {SOCIAL_LINKS.map((link) => (

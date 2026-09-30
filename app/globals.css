@@ -60,15 +60,15 @@ body::after {
 body::before {
   z-index: -2;
   background: url("/images/backgrounds/bloom-mountain-oil.webp") 58% center / cover no-repeat;
-  opacity: 0.72;
+  opacity: 0.8;
 }
 body::after {
   z-index: -1;
   background: linear-gradient(
     135deg,
-    rgba(7, 16, 20, 0.81) 0%,
-    rgba(14, 34, 25, 0.72) 52%,
-    rgba(7, 16, 14, 0.84) 100%
+    rgba(7, 16, 20, 0.76) 0%,
+    rgba(14, 34, 25, 0.66) 52%,
+    rgba(7, 16, 14, 0.79) 100%
   );
 }
 button,
@@ -125,14 +125,14 @@ button {
 @media (max-width: 767px) {
   body::before {
     background-position: 64% center;
-    opacity: 0.62;
+    opacity: 0.7;
   }
   body::after {
     background: linear-gradient(
       155deg,
-      rgba(7, 16, 20, 0.86) 0%,
-      rgba(14, 34, 25, 0.78) 54%,
-      rgba(7, 16, 14, 0.88) 100%
+      rgba(7, 16, 20, 0.81) 0%,
+      rgba(14, 34, 25, 0.72) 54%,
+      rgba(7, 16, 14, 0.83) 100%
     );
   }
 }

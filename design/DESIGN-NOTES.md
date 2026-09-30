@@ -80,6 +80,32 @@ See `docs/specs/DESIGN_CANON.md` for complete design specifications.
 
 ## Design Decisions Log
 
+### Decision: 2026-09-30 - Quieter Supporting Copy and Brighter Backdrop
+
+**Context:** Drew asked to remove the short supporting line from Services and
+the footer tagline, and to make the overall site feel slightly lighter.
+
+**Decision:** Remove both copy blocks while keeping the service heading and
+footer logo/social links. Increase landscape visibility and reduce the global
+ink/forest overlay slightly on desktop and mobile, retaining the existing
+dark-first palette and contrast hierarchy.
+
+### Decision: 2026-09-30 - Refined Questionnaire Controls
+
+**Context:** Drew requested that the questionnaire move away from the harsh
+square fields and browser-default dropdown presentation, with Apple-inspired
+restraint and polish.
+
+**Decision:** Questionnaire fields use opaque warm off-white surfaces with
+medium-radius corners, quiet borders, subtle depth, and focused accent rings.
+Select fields use a themed, keyboard-accessible menu so their open and closed
+states share the same visual language. Choice rows retain the continuous form
+structure while their checkboxes receive softer geometry and clearer states.
+
+**Implementation Notes:** This user-directed update supersedes the September 24
+square-control geometry for questionnaire controls only. No payload, validation,
+requiredness, or submission behavior changes.
+
 ### Decision: 2026-09-24 - Bloom Advisory Logo
 
 **Context:** Drew supplied a new stacked Bloom Advisory wordmark for the public

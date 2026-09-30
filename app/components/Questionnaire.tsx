@@ -4,6 +4,153 @@ import type { FormEvent } from "react";
 import { useMemo, useRef, useState, useEffect } from "react";
 import styles from "./Questionnaire.module.css";
 
+type SelectControlProps = {
+  id: string;
+  name: string;
+  value: string;
+  options: readonly string[];
+  onChange: (value: string) => void;
+  onBlur: () => void;
+  invalid: boolean;
+  describedBy: string;
+};
+
+function SelectControl({
+  id,
+  name,
+  value,
+  options,
+  onChange,
+  onBlur,
+  invalid,
+  describedBy,
+}: SelectControlProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedIndex = options.indexOf(value);
+  const [activeIndex, setActiveIndex] = useState(
+    selectedIndex >= 0 ? selectedIndex : 0,
+  );
+  const rootRef = useRef<HTMLDivElement>(null);
+  const listboxId = `${id}-listbox`;
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsidePointer = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsidePointer);
+    return () => document.removeEventListener("pointerdown", handleOutsidePointer);
+  }, [isOpen]);
+
+  const openMenu = (index = selectedIndex >= 0 ? selectedIndex : 0) => {
+    setActiveIndex(index);
+    setIsOpen(true);
+  };
+
+  const chooseOption = (index: number) => {
+    onChange(options[index]);
+    setActiveIndex(index);
+    setIsOpen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      if (!isOpen) {
+        openMenu();
+        return;
+      }
+
+      const direction = event.key === "ArrowDown" ? 1 : -1;
+      setActiveIndex((current) =>
+        (current + direction + options.length) % options.length,
+      );
+      return;
+    }
+
+    if (isOpen && (event.key === "Home" || event.key === "End")) {
+      event.preventDefault();
+      setActiveIndex(event.key === "Home" ? 0 : options.length - 1);
+      return;
+    }
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      if (isOpen) {
+        chooseOption(activeIndex);
+      } else {
+        openMenu();
+      }
+      return;
+    }
+
+    if (event.key === "Escape" && isOpen) {
+      event.preventDefault();
+      setIsOpen(false);
+    }
+
+    if (event.key === "Tab") {
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <div ref={rootRef} className={styles.selectControl}>
+      <button
+        id={id}
+        name={name}
+        type="button"
+        role="combobox"
+        className={styles.selectTrigger}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+        aria-activedescendant={isOpen ? `${id}-option-${activeIndex}` : undefined}
+        aria-required="true"
+        aria-invalid={invalid}
+        aria-describedby={describedBy}
+        onClick={() => (isOpen ? setIsOpen(false) : openMenu())}
+        onKeyDown={handleKeyDown}
+        onBlur={onBlur}
+      >
+        <span className={value ? styles.selectValue : styles.selectPlaceholder}>
+          {value || "Select one"}
+        </span>
+        <span className={styles.selectChevron} aria-hidden="true" />
+      </button>
+
+      {isOpen && (
+        <ul id={listboxId} className={styles.selectMenu} role="listbox">
+          {options.map((option, index) => (
+            <li
+              id={`${id}-option-${index}`}
+              key={option}
+              className={styles.selectOption}
+              role="option"
+              aria-selected={value === option}
+              data-active={activeIndex === index}
+              onMouseDown={(event) => event.preventDefault()}
+              onMouseEnter={() => setActiveIndex(index)}
+              onClick={() => chooseOption(index)}
+            >
+              <span>{option}</span>
+              {value === option && (
+                <span className={styles.optionCheck} aria-hidden="true">
+                  ✓
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 const COMPANY_TYPES = [
   "Construction / Homebuilding",
   "Real Estate / Property Management",
@@ -324,26 +471,16 @@ export default function Questionnaire() {
               <label className={styles.label} htmlFor="companyType">
                 What best describes your company?
               </label>
-              <select
+              <SelectControl
                 id="companyType"
                 name="companyType"
-                className={styles.select}
                 value={form.companyType}
-                onChange={(event) =>
-                  handleChange("companyType", event.target.value)
-                }
+                options={COMPANY_TYPES}
+                onChange={(value) => handleChange("companyType", value)}
                 onBlur={() => handleBlur("companyType")}
-                aria-required="true"
-                aria-invalid={Boolean(showError("companyType"))}
-                aria-describedby="companyType-error"
-              >
-                <option value="">Select one</option>
-                {COMPANY_TYPES.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                invalid={Boolean(showError("companyType"))}
+                describedBy="companyType-error"
+              />
               {hasCompanyTypeOther && (
                 <div className={styles.subField}>
                   <label className={styles.subFieldLabel} htmlFor="companyTypeOther">
@@ -376,26 +513,16 @@ export default function Questionnaire() {
                 Approximately how many full-time employees does your company
                 have?
               </label>
-              <select
+              <SelectControl
                 id="employeeCount"
                 name="employeeCount"
-                className={styles.select}
                 value={form.employeeCount}
-                onChange={(event) =>
-                  handleChange("employeeCount", event.target.value)
-                }
+                options={EMPLOYEE_COUNTS}
+                onChange={(value) => handleChange("employeeCount", value)}
                 onBlur={() => handleBlur("employeeCount")}
-                aria-required="true"
-                aria-invalid={Boolean(showError("employeeCount"))}
-                aria-describedby="employeeCount-error"
-              >
-                <option value="">Select one</option>
-                {EMPLOYEE_COUNTS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                invalid={Boolean(showError("employeeCount"))}
+                describedBy="employeeCount-error"
+              />
               <span
                 id="employeeCount-error"
                 className={styles.error}
@@ -460,26 +587,16 @@ export default function Questionnaire() {
               <label className={styles.label} htmlFor="processHandling">
                 How are most of these processes handled today?
               </label>
-              <select
+              <SelectControl
                 id="processHandling"
                 name="processHandling"
-                className={styles.select}
                 value={form.processHandling}
-                onChange={(event) =>
-                  handleChange("processHandling", event.target.value)
-                }
+                options={PROCESS_HANDLING}
+                onChange={(value) => handleChange("processHandling", value)}
                 onBlur={() => handleBlur("processHandling")}
-                aria-required="true"
-                aria-invalid={Boolean(showError("processHandling"))}
-                aria-describedby="processHandling-error"
-              >
-                <option value="">Select one</option>
-                {PROCESS_HANDLING.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                invalid={Boolean(showError("processHandling"))}
+                describedBy="processHandling-error"
+              />
               <span
                 id="processHandling-error"
                 className={styles.error}
@@ -542,26 +659,16 @@ export default function Questionnaire() {
                 How confident are you in the accuracy and consistency of your
                 operational data?
               </label>
-              <select
+              <SelectControl
                 id="dataConfidence"
                 name="dataConfidence"
-                className={styles.select}
                 value={form.dataConfidence}
-                onChange={(event) =>
-                  handleChange("dataConfidence", event.target.value)
-                }
+                options={DATA_CONFIDENCE}
+                onChange={(value) => handleChange("dataConfidence", value)}
                 onBlur={() => handleBlur("dataConfidence")}
-                aria-required="true"
-                aria-invalid={Boolean(showError("dataConfidence"))}
-                aria-describedby="dataConfidence-error"
-              >
-                <option value="">Select one</option>
-                {DATA_CONFIDENCE.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                invalid={Boolean(showError("dataConfidence"))}
+                describedBy="dataConfidence-error"
+              />
               <span
                 id="dataConfidence-error"
                 className={styles.error}
@@ -609,24 +716,16 @@ export default function Questionnaire() {
               <label className={styles.label} htmlFor="urgency">
                 How urgent is it for you to address these issues?
               </label>
-              <select
+              <SelectControl
                 id="urgency"
                 name="urgency"
-                className={styles.select}
                 value={form.urgency}
-                onChange={(event) => handleChange("urgency", event.target.value)}
+                options={URGENCY}
+                onChange={(value) => handleChange("urgency", value)}
                 onBlur={() => handleBlur("urgency")}
-                aria-required="true"
-                aria-invalid={Boolean(showError("urgency"))}
-                aria-describedby="urgency-error"
-              >
-                <option value="">Select one</option>
-                {URGENCY.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                invalid={Boolean(showError("urgency"))}
+                describedBy="urgency-error"
+              />
               <span
                 id="urgency-error"
                 className={styles.error}
